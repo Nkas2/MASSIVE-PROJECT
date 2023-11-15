@@ -29,34 +29,10 @@ export const Home = () => {
                 alt=""
                 className="absolute right-0 top-32"
               />
-
-              {/* <img
-                src="./assets/kantong-darah.svg"
-                alt=""
-                className="absolute right-0 top-[100px] pr-[2px] z-10"
-              />
-
-              <img
-                src="./assets/selang.svg"
-                alt=""
-                className="-z-0 absolute pl-[120px] pr-[224px] top-[140px] pt-[100px]"
-              /> */}
             </section>
           </div>
 
-          {/* <div>
-            <img
-              src="./assets/perban.svg"
-              alt=""
-              className="absolute pl-[174px] pt-[175px]"
-            />
-
-            <div>
-              <img src="./assets/tangan.svg" alt="" className="w-[1348px]" />
-            </div>
-          </div> */}
-
-          {/* section 2*/}
+          {/* section 2 */}
           <section className="flex mt-64">
             <div className="pt-16 ml-24">
               <h1 className="text-[60px] font-bold">
