@@ -1,3 +1,5 @@
+import { Footer } from '../../components/Footer';
+
 export const Home = () => {
   return (
     <>
@@ -87,7 +89,7 @@ export const Home = () => {
           </section>
 
           {/* section 4*/}
-          <section className="">
+          <section className="mb-52">
             {/* logo */}
             <div className="pl-28 relative">
               <div className="flex items-center relative ">
@@ -134,6 +136,12 @@ export const Home = () => {
               </button>
             </div>
           </section>
+
+          {/* footer */}
+          <Footer />
+          <div className="">
+            <img src="./assets/waves-footer.svg" alt="" className="w-full" />
+          </div>
         </div>
       </div>
     </>
