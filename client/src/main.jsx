@@ -10,6 +10,7 @@ import store from './store/store.js';
 import RootLayout from './layout/Root/index.jsx';
 import { Home } from './page/Homepage/Home.jsx';
 import { ThemeProvider } from '@emotion/react';
+import { JadwalDonor } from './page/JadwalDonor/JadwalDonor.jsx';
 // import { CssBaseline } from '@mui/material';
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/jadwalDonor',
+        element: <JadwalDonor />,
       },
     ],
   },
