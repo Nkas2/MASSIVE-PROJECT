@@ -4,7 +4,7 @@ import { ButtonSignIn } from './item/ButtonSignIn';
 export const Navbar = () => {
   return (
     <>
-      <div className="w-full px-12 bg-background flex justify-between items-center pb-3 pt-5">
+      <div className="w-full px-24 bg-background flex justify-between items-center pb-3 pt-5">
         {/* logo */}
         <div className="w-[30px] h-[40px] flex">
           <img src="./assets/logo.svg" alt="" />
@@ -16,7 +16,7 @@ export const Navbar = () => {
 
         {/* navlink */}
         <div className="ml-[500px]">
-          <ul className="flex gap-[38px]">
+          <ul className="flex gap-[30px]">
             <NavLink
               to={'/'}
               className={({ isActive }) =>
@@ -29,7 +29,7 @@ export const Navbar = () => {
               </li>
             </NavLink>
             <NavLink
-              to={'/jadwalHonor'}
+              to={'/jadwalDonor'}
               className={({ isActive }) =>
                 isActive
                   ? 'underline underline-offset-8 decoration-[4px] decoration-primary'
