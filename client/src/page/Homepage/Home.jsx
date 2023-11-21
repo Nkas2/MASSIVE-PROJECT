@@ -138,8 +138,8 @@ export const Home = () => {
           </section>
 
           {/* footer */}
-          <Footer />
           <div className="">
+            <Footer />
             <img src="./assets/waves-footer.svg" alt="" className="w-full" />
           </div>
         </div>
