@@ -11,6 +11,7 @@ export default {
         background: '#ebf1f6',
         primary: '#A21D21',
         secondary: '#F38596',
+        customGray: '#969696',
       },
     },
   },
