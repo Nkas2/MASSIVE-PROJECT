@@ -11,6 +11,7 @@ import RootLayout from './layout/Root/index.jsx';
 import { Home } from './page/Homepage/Home.jsx';
 import { ThemeProvider } from '@emotion/react';
 import { JadwalDonor } from './page/JadwalDonor/JadwalDonor.jsx';
+import { StokDarah } from './page/StokDarah/StokDarah.jsx';
 // import { CssBaseline } from '@mui/material';
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/jadwalDonor',
         element: <JadwalDonor />,
+      },
+      {
+        path: '/stokDarah',
+        element: <StokDarah />,
       },
     ],
   },
