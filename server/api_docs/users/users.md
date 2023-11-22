@@ -42,10 +42,10 @@ Request Body
 ```
 
 Response Body
-- Session: JWT AUTH TOKEN
 ```json
 {
   "data": {
+    "token": "token", // for get access token
     "access_token": "unique_access_token" // exp in 1 minute
   }
 }
@@ -240,5 +240,11 @@ Response Body Error
   "errors": "Enter the same password and confirmpassword"
 }
 ```
+
+## logout 
+endpoint: delete /api/users
+
+header:
+- token: 'Bearer access_Token'
 
 
