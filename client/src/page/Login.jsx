@@ -39,7 +39,7 @@ export const Login = () => {
                 <input
                   type="email"
                   name="email"
-                  className="w-96  outline-none h-14 rounded-[15px] border-2 pb-2 border-slate-300"
+                  className="w-96  outline-none h-14 rounded-[15px] border-2 pl-4 border-slate-300"
                   autoComplete="off"
                 />
               </div>
@@ -49,7 +49,7 @@ export const Login = () => {
                 <input
                   type="password"
                   name="password"
-                  className="w-96  outline-none h-14 rounded-[15px] border-2 pb-2 border-slate-300"
+                  className="w-96  outline-none h-14 rounded-[15px] border-2 pl-4 border-slate-300"
                   autoComplete="off"
                 />
               </div>
@@ -66,7 +66,7 @@ export const Login = () => {
           <div className="flex items-center pt">
             <p className="font-[600]">
               Belum punya akun ?{' '}
-              <Link to={'/'} className="text-primary">
+              <Link to={'/signup'} className="text-primary">
                 Sign Up
               </Link>
             </p>

@@ -1,4 +1,5 @@
 import { Footer } from '../../components/Footer';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
   return (
@@ -15,9 +16,11 @@ export const Home = () => {
                   Blood <span className="text-black">Bags</span>
                 </h1>
                 <div className="mt-14 flex items-center">
-                  <button className=" bg-primary rounded-3xl py-3 px-7 text-white text-base font-bold">
-                    Gabung Sekarang
-                  </button>
+                  <Link to={'/jadwalDonor'}>
+                    <button className=" bg-primary rounded-3xl py-3 px-7 text-white text-base font-bold">
+                      Gabung Sekarang
+                    </button>
+                  </Link>
                   <h4 className="pl-9 text-xl">
                     Gabung bersama kami dan temukan fitur <br />
                     menarik lainya !
@@ -80,9 +83,11 @@ export const Home = () => {
                 </div>
 
                 <div className="pl-12 pt-8">
-                  <button className="px-9 py-3 bg-primary rounded-[30px] font-bold text-[20px] text-white">
-                    Stok Darah
-                  </button>
+                  <Link to={'/stokDarah'}>
+                    <button className="px-9 py-3 bg-primary rounded-[30px] font-bold text-[20px] text-white">
+                      Stok Darah
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
