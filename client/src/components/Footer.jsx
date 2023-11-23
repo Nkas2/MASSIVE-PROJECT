@@ -5,7 +5,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 export const Footer = () => {
   return (
     <>
-      <div className="relative">
+      <div id="foot" className="relative">
         {/* logo */}
 
         <div className="ml-14 absolute mt-96">
