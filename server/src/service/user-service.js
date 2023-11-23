@@ -1,6 +1,8 @@
 import { validate } from "../validation/validation.js";
 import {
   changePasswordValidation,
+  editDetailUserValidation,
+  emailValidation,
   loginUserValidation,
   registerUserValidation,
 } from "../validation/user-validation.js";
@@ -138,17 +140,62 @@ const chagePassword = async (request, email) => {
   );
 };
 
-// chagePassword(
-//   {
-//     old_password: "rahasiaa",
-//     new_password: "rahasiaaa",
-//     new_password_conf: "rahasiaaa",
-//   },
-//   "john@gmail.com"
-// );
+const getUserEdit = async (email) => {
+  email = validate(emailValidation, email);
+
+  const [emailInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
+
+  if (email.length === 0) {
+    throw new RespondError("404", "User Not Found");
+  }
+
+  const [user] = await db.execute(
+    "SELECT user_details.name, user_details.no_reg_pmi, user_details.phone_number, user_details.gender, blood_types.blood_type, rhesus.rhs as rhesus, user_details.city FROM users JOIN user_details ON users.id = user_details.user_id JOIN blood_types ON user_details.id_blood_type = blood_types.id JOIN rhesus ON user_details.id_rhesus = rhesus.id where users.email = ?",
+    [email]
+  );
+
+  return user[0];
+};
+
+const editDetailUsers = async (req, email) => {
+  req = validate(editDetailUserValidation, req);
+
+  const [emailInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
+
+  if (email.length === 0) {
+    throw new RespondError("404", "User Not Found");
+  }
+
+  const [updateUserDetails] = await db.execute(
+    "UPDATE user_details SET name = ?, phone_number = ?, city = ?, gender = ? , no_reg_pmi = ? , id_blood_type = (SELECT id FROM blood_types WHERE blood_type = ? ), id_rhesus = (SELECT id FROM rhesus WHERE rhs = ? ) WHERE user_id = ?",
+    [
+      req.name,
+      req.phone_number,
+      req.city,
+      req.gender,
+      req.no_reg_pmi,
+      req.blood_type,
+      req.rhesus,
+      emailInDb[0].id,
+    ]
+  );
+
+  const [selectedUser] = await db.execute(
+    "SELECT usr.name, usr.no_reg_pmi, usr.phone_number, usr.gender, bts.blood_type, rhs.rhs as rhesus, usr.city FROM user_details usr JOIN rhesus rhs ON usr.id_rhesus = rhs.id JOIN blood_types bts ON usr.id_blood_type = bts.id WHERE user_id = ?",
+    [emailInDb[0].id]
+  );
+
+  return selectedUser[0];
+};
 
 export default {
   register,
   login,
   chagePassword,
+  getUserEdit,
+  editDetailUsers,
 };
