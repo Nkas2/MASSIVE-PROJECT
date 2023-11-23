@@ -25,8 +25,22 @@ const changePasswordValidation = Joi.object({
     }),
 });
 
+const emailValidation = Joi.string().email().required();
+
+const editDetailUserValidation = Joi.object({
+  name: Joi.string().required(),
+  no_reg_pmi: Joi.string().required(),
+  phone_number: Joi.string().pattern(new RegExp("^[0-9]{8,15}$")).required(),
+  gender: Joi.string().valid("Pria", "Perempuan").required(),
+  blood_type: Joi.string().valid("A", "B", "AB", "O").required(),
+  rhesus: Joi.string().valid("+", "-").required(),
+  city: Joi.string().required(),
+});
+
 export {
   registerUserValidation,
   loginUserValidation,
   changePasswordValidation,
+  emailValidation,
+  editDetailUserValidation,
 };

@@ -1,10 +1,8 @@
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-dotenv.config();
 
 const generateAccessToken = (user) => {
   const accessToken = jwt.sign(user, process.env.SECRET_ACCESS_TOKEN, {
-    expiresIn: "60s",
+    expiresIn: "600s",
   });
   return accessToken;
 };

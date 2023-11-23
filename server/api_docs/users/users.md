@@ -1,3 +1,24 @@
+TOLONG BUAT TETAPKAN FIELD SOURCE DI TIAP BODY REQUEST 
+```json
+{
+  "source": "mobile",
+  // or
+  "source": "website"
+}
+```
+untuk kepentingan authentifikasi
+
+lalu untuk mobile aku akan mengirim token di response body 
+
+dan juga ketika menrequest api yang membutuhkan autentifikasi 
+
+tambahkan headerseperti ini
+```json
+{
+  "Authorization": "Bearer access_token" // access_token !== token 
+}
+```
+
 # API ENDPOINT USER
 
 ## REGISTER USER API
@@ -37,15 +58,26 @@ Request Body
 ```json
 {
   "email": "john@gmail.com",
-  "password": "rahasia"
+  "password": "rahasia",
+  "source": "mobile"
 }
 ```
 
-Response Body
+Response Body (mobile)
 ```json
 {
   "data": {
     "token": "token", // for get access token
+    "access_token": "unique_access_token" // exp in 1 minute
+  }
+}
+```
+
+Response Body (web)
+token akan ku kirim kedaam cookie
+```json
+{
+  "data": {// for get access token
     "access_token": "unique_access_token" // exp in 1 minute
   }
 }
@@ -62,7 +94,7 @@ Response Body Error
 Endpoint: PATCH /api/users
 
 Header
-- Authorization: "Bearer access_token"
+- Authorization: "Bearer access_token" 
 
 Request Body
 
@@ -128,7 +160,7 @@ Request Body
   "phone_number": "08521215",
   "gender": "Pria/Perempuan",
   "blood_type": "AB",
-  "Rhesus": "Positif",
+  "rhesus": "+",
   "city": "Batam" 
 }
 ```
@@ -141,7 +173,7 @@ Response Body Success
   "phone_number": "08521215",
   "gender": "Pria",
   "blood_type": "AB",
-  "Rhesus": "Positif",
+  "rhesus": "Positif",
   "city": "Batam"
 }
 ```
