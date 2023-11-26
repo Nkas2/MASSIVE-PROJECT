@@ -1,10 +1,12 @@
 import { validate } from "../validation/validation.js";
 import {
   changePasswordValidation,
+  codeValidation,
   editDetailUserValidation,
   emailValidation,
   loginUserValidation,
   registerUserValidation,
+  resetPasswordValidation,
 } from "../validation/user-validation.js";
 import { RespondError } from "../error/ressponse-error.js";
 import { TrasactionError } from "../error/transaction-error.js";
@@ -12,6 +14,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import db from "../application/db.js";
 import { generateAccessToken, generateToken } from "../lib/token/token.js";
+import { sendEmail } from "../lib/email/email.js";
+import { generateResetCode } from "../lib/token/reset-token.js";
 
 const register = async (request) => {
   request = validate(registerUserValidation, request);
@@ -192,10 +196,136 @@ const editDetailUsers = async (req, email) => {
   return selectedUser[0];
 };
 
+const getUser = async (email) => {
+  email = validate(emailValidation, email);
+
+  const [emailInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
+
+  if (emailInDb.length === 0) {
+    throw new RespondError("404", "User Not Found");
+  }
+
+  const [user] = await db.execute(
+    "SELECT usr.name,usr.no_reg_pmi, usr.image, blood_types.blood_type, rhesus.rhs as rhesus, usr.city FROM user_details usr JOIN users user ON user.id = usr.user_id JOIN blood_types ON usr.id_blood_type = blood_types.id JOIN rhesus ON usr.id_rhesus = rhesus.id WHERE user.email = ?",
+    [email]
+  );
+
+  return user[0];
+};
+
+const sendEmailForResetPassword = async (email) => {
+  email = validate(emailValidation, email);
+
+  const [userInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
+  if (userInDb.length === 0) {
+    throw new RespondError(404, "User not found");
+  }
+
+  const token = generateResetCode();
+
+  await db.execute(
+    "INSERT INTO reset_password_token (email, token) VALUES (?, ?)",
+    [email, token]
+  );
+
+  sendEmail(email, token);
+
+  return {
+    email,
+  };
+};
+
+const verifyCodeResetPassoword = async (code) => {
+  code = validate(codeValidation, code);
+
+  let [email] = await db.execute(
+    "SELECT email FROM reset_password_token WHERE token = ?",
+    [code]
+  );
+
+  if (email.length === 0) {
+    throw new RespondError(400, "Wrong Reset Token");
+  }
+
+  await db.execute("DELETE FROM reset_password_token WHERE token = ?", [code]);
+
+  email = email[0].email;
+  return {
+    email,
+  };
+};
+
+const resetPassword = async (req) => {
+  req = validate(resetPasswordValidation, req);
+
+  const [email] = await db.execute("SELECT * FROM users WHERE email = ?", [
+    req.email,
+  ]);
+
+  if (email.length === 0) {
+    throw new RespondError(400, "Email not found");
+  }
+
+  const newPassword = await bcrypt.hash(req.password, 10);
+
+  await db.execute("UPDATE users SET password = ? WHERE email = ?", [
+    newPassword,
+    email[0].email,
+  ]);
+};
+
+const logout = async (email) => {
+  const [user] = await db.execute("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
+
+  if (!user[0]) {
+    throw new RespondError(404, "Not Found");
+  }
+
+  if (user[0].token === null) {
+    throw new RespondError(400, "Bad Request");
+  }
+
+  await db.execute("UPDATE users SET token = ? WHERE email = ?", [null, email]);
+};
+
+const uploadImageProfile = async (email, fileName) => {
+  const [users] = await db.execute("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
+
+  if (email.length === 0) {
+    throw new RespondError(400, "Email not found");
+  }
+
+  await db.execute("UPDATE user_details SET image = ? WHERE user_id = ?", [
+    fileName,
+    users[0].id,
+  ]);
+
+  const [image] = await db.execute(
+    "SELECT image FROM user_details WHERE user_id = ?",
+    [users[0].id]
+  );
+
+  return image[0];
+};
+
 export default {
   register,
   login,
   chagePassword,
   getUserEdit,
   editDetailUsers,
+  getUser,
+  sendEmailForResetPassword,
+  verifyCodeResetPassoword,
+  resetPassword,
+  logout,
+  uploadImageProfile,
 };
