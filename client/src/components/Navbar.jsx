@@ -50,8 +50,8 @@ export const Navbar = () => {
                 Stok Darah
               </li>
             </NavLink>
-            <NavLink
-              to={'/tentangKami'}
+            <a
+              href="#foot"
               className={({ isActive }) =>
                 isActive
                   ? 'underline underline-offset-8 decoration-[4px] decoration-primary'
@@ -60,7 +60,7 @@ export const Navbar = () => {
               <li className="text-black text-lg cursor-pointer hover:underline underline-offset-8 decoration-[4px] decoration-primary hover:text-primary">
                 Tentang Kami
               </li>
-            </NavLink>
+            </a>
           </ul>
         </div>
         <ButtonSignIn />

@@ -12,6 +12,9 @@ import { Home } from './page/Homepage/Home.jsx';
 import { ThemeProvider } from '@emotion/react';
 import { JadwalDonor } from './page/JadwalDonor/JadwalDonor.jsx';
 import { StokDarah } from './page/StokDarah/StokDarah.jsx';
+import { AuthLayout } from './layout/Auth/AuthLayout.jsx';
+import { Login } from './page/Login.jsx';
+import { SignUp } from './page/SignUp.jsx';
 // import { CssBaseline } from '@mui/material';
 
 const router = createBrowserRouter([
@@ -30,6 +33,20 @@ const router = createBrowserRouter([
       {
         path: '/stokDarah',
         element: <StokDarah />,
+      },
+    ],
+  },
+  {
+    path: '/',
+    element: <AuthLayout />,
+    children: [
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/signup',
+        element: <SignUp />,
       },
     ],
   },
