@@ -198,6 +198,7 @@ Request Body
   "no_reg_pmi": "1345679", // kalo belum ada datanya isinya null
   "image": "http://.......",
   "blood_type": "AB",
+  "rhesus": "+",
   "city": "Tanggerang"
 }
 ```
@@ -227,7 +228,7 @@ Response Body Error
 ```
 
 ## POST VERIFY RESET PASSWORD CODE
-Endpoint: /api/users/reset/code
+Endpoint: post /api/users/reset/code
 
 Request Body
 ```json
@@ -238,7 +239,9 @@ Request Body
 Response Body Success
 ```json
 {
-  "data": "OK"
+  "data": {
+    "email": "nayandra@gmail.com"
+  }
 }
 ```
 
@@ -250,12 +253,13 @@ Response Body Error
 ```
 
 ## NEW PASSWORD 
-Endpoint: /api/users/reset/password
+Endpoint: post /api/users/reset/password
 Request Body:
 ```json
 {
   "password": "rahasia3",
-  "conf_password": "rahasia3"
+  "conf_password": "rahasia3",
+  "email": "nayandra@gmail.com"
 }
 ```
 
@@ -274,9 +278,10 @@ Response Body Error
 ```
 
 ## logout 
-endpoint: delete /api/users
+endpoint: delete /api/users?type=mobile atau /api/users?type=web
 
-header:
-- token: 'Bearer access_Token'
+MOBILE:
+Header :
+- Authorization : token // token bukan access token !!
 
 

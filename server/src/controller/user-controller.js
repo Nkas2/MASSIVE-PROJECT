@@ -1,4 +1,7 @@
 import db from "../application/db.js";
+import { RespondError } from "../error/ressponse-error.js";
+import { getCookie } from "../lib/getCookie.js";
+import { getHeader } from "../lib/getHeader.js";
 import userService from "../service/user-service.js";
 
 const register = async (req, res, next) => {
@@ -16,12 +19,9 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const { source } = req.body;
-    if (req.body.source) {
-      delete req.body.source;
-    }
+    const type = req.query.type;
     const result = await userService.login(req.body);
-    if (source === "website") {
+    if (type === "website") {
       res
         .status(200)
         .cookie("token", result.token, {
@@ -33,7 +33,7 @@ const login = async (req, res, next) => {
             accessToken: result.accessToken,
           },
         });
-    } else if (source === "mobile") {
+    } else if (type === "mobile") {
       res.status(200).json({
         data: result,
       });
@@ -88,10 +88,116 @@ const editDetailUsers = async (req, res, next) => {
   }
 };
 
+const getUser = async (req, res, next) => {
+  try {
+    const result = await userService.getUser(req.user.email);
+    res.status(200).json({
+      data: result,
+    });
+  } catch (error) {
+    next(e);
+  } finally {
+    db.release();
+  }
+};
+
+const sendEmailForResetPassword = async (req, res, next) => {
+  try {
+    const result = await userService.sendEmailForResetPassword(req.body.email);
+    res.status(200).json({
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  } finally {
+    db.release();
+  }
+};
+
+const verifyCodeResetPassoword = async (req, res, next) => {
+  try {
+    const result = await userService.verifyCodeResetPassoword(req.body.code);
+    res.status(200).json({
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  } finally {
+    db.release;
+  }
+};
+
+const resetPassword = async (req, res, next) => {
+  try {
+    await userService.resetPassword(req.body);
+    res.status(200).json({
+      data: "OK",
+    });
+  } catch (error) {
+    next(error);
+  } finally {
+    db.release();
+  }
+};
+
+const logout = async (req, res, next) => {
+  try {
+    const { type } = req.query;
+    if (!type) {
+      return res
+        .status(400)
+        .json({
+          errors: "Bad Request",
+        })
+        .end();
+    }
+    await userService.logout(req.user.email);
+
+    if (type === "website") {
+      res.clearCookie("token");
+      res.status(200).json({
+        data: "OK",
+      });
+    } else {
+      res.status(200).json({
+        data: "OK",
+      });
+    }
+  } catch (e) {
+    next(e);
+  } finally {
+    db.release();
+  }
+};
+
+const uploadImageProfile = async (req, res, next) => {
+  try {
+    if (!req.file) {
+      throw new RespondError(400, "Insert image");
+    }
+    const email = req.user.email;
+    const file = req.file.filename;
+    const result = await userService.uploadImageProfile(email, file);
+    res.status(200).json({
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  } finally {
+    db.release();
+  }
+};
+
 export default {
   register,
   login,
   changePassword,
   getUserEdit,
   editDetailUsers,
+  getUser,
+  sendEmailForResetPassword,
+  verifyCodeResetPassoword,
+  resetPassword,
+  logout,
+  uploadImageProfile,
 };

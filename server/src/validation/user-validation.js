@@ -37,10 +37,24 @@ const editDetailUserValidation = Joi.object({
   city: Joi.string().required(),
 });
 
+const codeValidation = Joi.string()
+  .length(6)
+  .regex(/^[A-Z0-9]+$/);
+
+const resetPasswordValidation = Joi.object({
+  password: Joi.string().min(6).required(),
+  conf_password: Joi.string().valid(Joi.ref("password")).required(),
+  email: Joi.string()
+    .email({ tlds: { allow: false } }) // Menetapkan bahwa email tidak perlu memiliki domain top-level (TLD)
+    .required(),
+});
+
 export {
   registerUserValidation,
   loginUserValidation,
   changePasswordValidation,
   emailValidation,
   editDetailUserValidation,
+  codeValidation,
+  resetPasswordValidation,
 };
