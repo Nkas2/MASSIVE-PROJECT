@@ -3,6 +3,7 @@ import { authMiddleware } from "../middleware/auth-middleware.js";
 import userController from "../controller/user-controller.js";
 import multer from "multer";
 import { fileFilter, storage } from "../config/multer.js";
+import donorController from "../controller/donor-controller.js";
 
 const userRouter = new express.Router();
 
@@ -21,5 +22,6 @@ userRouter.post(
   multer({ storage: storage, fileFilter: fileFilter }).single("image"),
   userController.uploadImageProfile
 );
+userRouter.post("/api/reminder", authMiddleware, donorController.reminderMe);
 
 export { userRouter };

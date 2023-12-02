@@ -10,7 +10,6 @@ import {
 } from "../validation/user-validation.js";
 import { RespondError } from "../error/ressponse-error.js";
 import { TrasactionError } from "../error/transaction-error.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import db from "../application/db.js";
 import { generateAccessToken, generateToken } from "../lib/token/token.js";
@@ -152,11 +151,11 @@ const getUserEdit = async (email) => {
   ]);
 
   if (email.length === 0) {
-    throw new RespondError("404", "User Not Found");
+    throw new RespondError(404, "User Not Found");
   }
 
   const [user] = await db.execute(
-    "SELECT user_details.name, user_details.no_reg_pmi, user_details.phone_number, user_details.gender, blood_types.blood_type, rhesus.rhs as rhesus, user_details.city FROM users JOIN user_details ON users.id = user_details.user_id JOIN blood_types ON user_details.id_blood_type = blood_types.id JOIN rhesus ON user_details.id_rhesus = rhesus.id where users.email = ?",
+    "SELECT user_details.name, user_details.no_reg_pmi, user_details.phone_number, user_details.gender, blood_types.blood_type, rhesus.rhs as rhesus, user_details.city, user_details.image FROM users JOIN user_details ON users.id = user_details.user_id JOIN blood_types ON user_details.id_blood_type = blood_types.id JOIN rhesus ON user_details.id_rhesus = rhesus.id where users.email = ?",
     [email]
   );
 
