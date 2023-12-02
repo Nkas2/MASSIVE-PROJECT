@@ -1,7 +1,5 @@
 import db from "../application/db.js";
 import { RespondError } from "../error/ressponse-error.js";
-import { getCookie } from "../lib/getCookie.js";
-import { getHeader } from "../lib/getHeader.js";
 import userService from "../service/user-service.js";
 
 const register = async (req, res, next) => {
@@ -69,7 +67,7 @@ const getUserEdit = async (req, res, next) => {
       data: result,
     });
   } catch (error) {
-    next(e);
+    next(error);
   } finally {
     db.release();
   }
