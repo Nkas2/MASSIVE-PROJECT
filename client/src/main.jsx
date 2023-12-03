@@ -15,6 +15,7 @@ import { StokDarah } from './page/StokDarah/StokDarah.jsx';
 import { AuthLayout } from './layout/Auth/AuthLayout.jsx';
 import { Login } from './page/Login.jsx';
 import { SignUp } from './page/SignUp.jsx';
+import { LupaPassword } from './page/LupaPassword.jsx';
 // import { CssBaseline } from '@mui/material';
 
 const router = createBrowserRouter([
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp />,
+      },
+      {
+        path: '/lupaPassword',
+        element: <LupaPassword />,
       },
     ],
   },

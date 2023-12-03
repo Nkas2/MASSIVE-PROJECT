@@ -44,7 +44,7 @@ export const Login = () => {
                 />
               </div>
 
-              <div>
+              <div className="mb-3">
                 <h1>Password</h1>
                 <input
                   type="password"
@@ -54,9 +54,11 @@ export const Login = () => {
                 />
               </div>
 
-              <div className="mb-12 text-right">
-                <p>Lupa Password?</p>
-              </div>
+              <Link to={'/lupaPassword'}>
+                <div className="mb-12 text-right">
+                  <p>Lupa Password?</p>
+                </div>
+              </Link>
             </div>
 
             <Link to={'/'} className="pt-4">
