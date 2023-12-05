@@ -1,6 +1,7 @@
 import db from "../application/db.js";
 import { RespondError } from "../error/ressponse-error.js";
 import userService from "../service/user-service.js";
+import tokenService from "../service/token-service.js";
 
 const register = async (req, res, next) => {
   try {
@@ -24,7 +25,7 @@ const login = async (req, res, next) => {
         .status(200)
         .cookie("token", result.token, {
           httpOnly: true,
-          maxAge: 90 * 24 * 60 * 60 * 1000,
+          maxAge: 365 * 24 * 60 * 60 * 1000,
         })
         .json({
           data: {
@@ -186,6 +187,19 @@ const uploadImageProfile = async (req, res, next) => {
   }
 };
 
+const newToken = async (req, res, next) => {
+  try {
+    const result = await tokenService.newToken(req.user.token);
+    res.status(200).json({
+      data: {
+        accessToken: result,
+      },
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
 export default {
   register,
   login,
@@ -198,4 +212,5 @@ export default {
   resetPassword,
   logout,
   uploadImageProfile,
+  newToken,
 };

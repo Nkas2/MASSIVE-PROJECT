@@ -18,5 +18,6 @@ publicRoutes.post("/api/users/reset/password", userController.resetPassword);
 publicRoutes.get("/api/pmi", donorController.getAllPmi);
 publicRoutes.get("/api/pmi/:pmiId", donorController.getDetailPmi);
 publicRoutes.get("/api/event", eventMiddleware, donorController.getEvent);
+publicRoutes.get("/api/pmi/stock/:id", donorController.getStockBlood);
 
 export { publicRoutes };

@@ -3,7 +3,7 @@ import donorService from "../service/donor-service.js";
 
 const getAllPmi = async (req, res, next) => {
   try {
-    const result = await donorService.getAllPmi();
+    const result = await donorService.getAllPmi(req.query.loc || "");
     res.status(200).json({
       data: result,
     });
@@ -60,7 +60,56 @@ const reminderMe = async (req, res, next) => {
   } catch (e) {
     next(e);
   } finally {
-    db.release;
+    db.release();
+  }
+};
+
+const eventDetail = async (req, res, next) => {
+  try {
+    if (!req.user) {
+      const result = await donorService.eventDetail(req.params.id);
+      return res.status(200).json({
+        data: result,
+      });
+    }
+
+    const result = await donorService.eventDetailWithAuth(
+      req.params.id,
+      req.user.email
+    );
+    res.status(200).json({
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  } finally {
+    db.release();
+  }
+};
+
+const deleteRemind = async (req, res, next) => {
+  try {
+    await donorService.deleteRemind(req.user.email, req.body.event_id);
+    res.status(200).json({
+      data: "OK",
+    });
+  } catch (e) {
+    next(e);
+  } finally {
+    db.release();
+  }
+};
+
+const getStockBlood = async (req, res, next) => {
+  try {
+    const result = await donorService.getStockBlood(req.params.id);
+    res.status(200).json({
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  } finally {
+    db.release();
   }
 };
 
@@ -68,6 +117,8 @@ export default {
   getAllPmi,
   getDetailPmi,
   getEvent,
-  getEvent,
   reminderMe,
+  eventDetail,
+  deleteRemind,
+  getStockBlood,
 };
