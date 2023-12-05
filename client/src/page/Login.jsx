@@ -32,7 +32,7 @@ export const Login = () => {
             </h1>
           </div>
 
-          <Form method="post" className="mt-6">
+          <Form method="post" className="mt-6 mb-3">
             <div>
               <div className="mb-5">
                 <h1>Email</h1>
@@ -44,7 +44,7 @@ export const Login = () => {
                 />
               </div>
 
-              <div>
+              <div className="mb-3">
                 <h1>Password</h1>
                 <input
                   type="password"
@@ -54,9 +54,11 @@ export const Login = () => {
                 />
               </div>
 
-              <div className="mb-12 text-right">
-                <p>Lupa Password?</p>
-              </div>
+              <Link to={'/lupaPassword'}>
+                <div className="mb-12 text-right">
+                  <p>Lupa Password?</p>
+                </div>
+              </Link>
             </div>
 
             <Link to={'/'} className="pt-4">

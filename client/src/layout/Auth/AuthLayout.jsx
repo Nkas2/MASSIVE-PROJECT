@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 export const AuthLayout = () => {
   return (
     <>
-      <div className="flex h-screen">
+      <div className="flex">
         {/* form */}
         <div className=" items-center">
           <Outlet />
