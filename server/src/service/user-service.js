@@ -83,6 +83,7 @@ const login = async (request) => {
     email: resultUser[0].email,
     name: resultUser[0].name,
     phone_number: resultUser[0].phone_number,
+    image: resultUser[0].image,
   });
 
   const accessToken = generateAccessToken({
@@ -90,6 +91,7 @@ const login = async (request) => {
     email: resultUser[0].email,
     name: resultUser[0].name,
     phone_number: resultUser[0].phone_number,
+    image: resultUser[0].image,
   });
 
   const result = await db.execute("UPDATE users SET token = ? WHERE id = ?", [
@@ -313,6 +315,12 @@ const uploadImageProfile = async (email, fileName) => {
   );
 
   return image[0];
+};
+
+const getDonorHistory = async (id) => {
+  if (!id) {
+    throw new RespondError(404, "User not found");
+  }
 };
 
 export default {
