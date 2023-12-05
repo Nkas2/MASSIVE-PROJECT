@@ -1,4 +1,5 @@
-import { Form } from 'react-router-dom';
+import { Form, Link } from 'react-router-dom';
+import { ButtonAuth } from '../components/item/ButtonAuth';
 
 export const SignUp = () => {
   return (
@@ -24,7 +25,7 @@ export const SignUp = () => {
             </h1>
           </div>
 
-          <Form method="post">
+          <Form method="post" className="mb-10">
             <div>
               <div className="mb-3">
                 <h1>Email</h1>
@@ -75,8 +76,26 @@ export const SignUp = () => {
                   autoComplete="off"
                 />
               </div>
+
+              <div className="flex gap-3 mb-3">
+                <input type="checkbox" name="agreement" />
+                <p>Agree to join</p>
+              </div>
+
+              <Link to={'/login'}>
+                <div className="">
+                  <ButtonAuth text={'Buat Akun'} />
+                </div>
+              </Link>
             </div>
           </Form>
+
+          <div className="flex items-center">
+            <p>Sudah punya akun ? </p>{' '}
+            <Link to={'/login'} className="text-primary">
+              Sign In
+            </Link>
+          </div>
         </div>
       </div>
     </>

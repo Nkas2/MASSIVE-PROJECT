@@ -32,7 +32,7 @@ export const Login = () => {
             </h1>
           </div>
 
-          <Form method="post" className="mt-6">
+          <Form method="post" className="mt-6 mb-3">
             <div>
               <div className="mb-5">
                 <h1>Email</h1>
