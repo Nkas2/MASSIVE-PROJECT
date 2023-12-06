@@ -16,6 +16,7 @@ import { AuthLayout } from './layout/Auth/AuthLayout.jsx';
 import { Login } from './page/Login.jsx';
 import { SignUp } from './page/SignUp.jsx';
 import { LupaPassword } from './page/LupaPassword.jsx';
+import { DetailEvent } from './page/JadwalDonor/DetailEvent.jsx';
 // import { CssBaseline } from '@mui/material';
 
 const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/jadwalDonor',
         element: <JadwalDonor />,
+      },
+      {
+        path: '/jadwalDonor/detailEvent',
+        element: <DetailEvent />,
       },
       {
         path: '/stokDarah',
