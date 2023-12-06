@@ -31,6 +31,7 @@ userRouter.delete(
   donorController.deleteRemind
 );
 userRouter.get("/api/event/:id", eventMiddleware, donorController.eventDetail);
-userRouter.get("/api/test", newToken_middleware, userController.newToken);
+userRouter.get("/api/token", newToken_middleware, userController.newToken);
+userRouter.get("/api/history", authMiddleware, userController.getDonorHistory);
 
 export { userRouter };

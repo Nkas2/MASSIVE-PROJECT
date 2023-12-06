@@ -197,6 +197,21 @@ const newToken = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
+  } finally {
+    db.release();
+  }
+};
+
+const getDonorHistory = async (req, res, next) => {
+  try {
+    const result = await userService.getDonorHistory(req.user.email);
+    res.status(200).json({
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  } finally {
+    db.release();
   }
 };
 
@@ -213,4 +228,5 @@ export default {
   logout,
   uploadImageProfile,
   newToken,
+  getDonorHistory,
 };

@@ -317,10 +317,25 @@ const uploadImageProfile = async (email, fileName) => {
   return image[0];
 };
 
-const getDonorHistory = async (id) => {
-  if (!id) {
+const getDonorHistory = async (email) => {
+  if (!email) {
     throw new RespondError(404, "User not found");
   }
+
+  const [user] = await db.execute("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
+
+  if (user.length === 0) {
+    throw new RespondError(404, "NOT FOUND");
+  }
+
+  const [history] = await db.execute(
+    `select DATE_FORMAT(dh.date, '%e %M %Y %H:%i') AS date, pmi.name, dh.status, concat_ws("", blood_types.blood_type, rhesus.rhs) as goldar from donor_history dh right join pmi on pmi.id = dh.pmi_id join users on dh.user_id = users.id join user_details on users.id = user_details.user_id left join blood_types on user_details.id_blood_type = blood_types.id left join rhesus on user_details.id_rhesus = rhesus.id where dh.user_id = (select id from users where email = ?)`,
+    [email]
+  );
+
+  return history;
 };
 
 export default {
@@ -335,4 +350,5 @@ export default {
   resetPassword,
   logout,
   uploadImageProfile,
+  getDonorHistory,
 };
