@@ -11,8 +11,6 @@ const register = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-  } finally {
-    db.release();
   }
 };
 
@@ -43,8 +41,6 @@ const login = async (req, res, next) => {
     }
   } catch (error) {
     next(error);
-  } finally {
-    db.release();
   }
 };
 
@@ -56,8 +52,6 @@ const changePassword = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-  } finally {
-    db.release();
   }
 };
 
@@ -69,8 +63,6 @@ const getUserEdit = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-  } finally {
-    db.release();
   }
 };
 
@@ -82,8 +74,6 @@ const editDetailUsers = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-  } finally {
-    db.release();
   }
 };
 
@@ -95,8 +85,6 @@ const getUser = async (req, res, next) => {
     });
   } catch (error) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 
@@ -108,8 +96,6 @@ const sendEmailForResetPassword = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-  } finally {
-    db.release();
   }
 };
 
@@ -121,8 +107,6 @@ const verifyCodeResetPassoword = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-  } finally {
-    db.release;
   }
 };
 
@@ -134,8 +118,6 @@ const resetPassword = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-  } finally {
-    db.release();
   }
 };
 
@@ -164,8 +146,6 @@ const logout = async (req, res, next) => {
     }
   } catch (e) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 
@@ -182,8 +162,6 @@ const uploadImageProfile = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 
@@ -197,8 +175,6 @@ const newToken = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 
@@ -210,8 +186,6 @@ const getDonorHistory = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 

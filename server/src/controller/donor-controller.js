@@ -9,8 +9,6 @@ const getAllPmi = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 
@@ -24,8 +22,6 @@ const getDetailPmi = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 
@@ -46,8 +42,6 @@ const getEvent = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 
@@ -59,8 +53,6 @@ const reminderMe = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 
@@ -82,8 +74,6 @@ const eventDetail = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 
@@ -95,8 +85,6 @@ const deleteRemind = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 
@@ -108,8 +96,6 @@ const getStockBlood = async (req, res, next) => {
     });
   } catch (e) {
     next(e);
-  } finally {
-    db.release();
   }
 };
 
