@@ -58,7 +58,7 @@ const register = async (request, db) => {
   db.release();
 };
 
-const login = async (request) => {
+const login = async (request, db) => {
   request = validate(loginUserValidation, request);
 
   const [resultUser] = await db.execute(
@@ -106,7 +106,7 @@ const login = async (request) => {
   };
 };
 
-const chagePassword = async (request, email) => {
+const chagePassword = async (request, email, db) => {
   request = validate(changePasswordValidation, request);
 
   const [user] = await db.execute("SELECT * FROM users WHERE email = ?", [
@@ -146,7 +146,7 @@ const chagePassword = async (request, email) => {
   );
 };
 
-const getUserEdit = async (email) => {
+const getUserEdit = async (email, db) => {
   email = validate(emailValidation, email);
 
   const [emailInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
@@ -165,7 +165,7 @@ const getUserEdit = async (email) => {
   return user[0];
 };
 
-const editDetailUsers = async (req, email) => {
+const editDetailUsers = async (req, email, db) => {
   req = validate(editDetailUserValidation, req);
 
   const [emailInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
@@ -198,7 +198,7 @@ const editDetailUsers = async (req, email) => {
   return selectedUser[0];
 };
 
-const getUser = async (email) => {
+const getUser = async (email, db) => {
   email = validate(emailValidation, email);
 
   const [emailInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
@@ -217,7 +217,7 @@ const getUser = async (email) => {
   return user[0];
 };
 
-const sendEmailForResetPassword = async (email) => {
+const sendEmailForResetPassword = async (email, db) => {
   email = validate(emailValidation, email);
 
   const [userInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
@@ -241,7 +241,7 @@ const sendEmailForResetPassword = async (email) => {
   };
 };
 
-const verifyCodeResetPassoword = async (code) => {
+const verifyCodeResetPassoword = async (code, db) => {
   code = validate(codeValidation, code);
 
   let [email] = await db.execute(
@@ -261,7 +261,7 @@ const verifyCodeResetPassoword = async (code) => {
   };
 };
 
-const resetPassword = async (req) => {
+const resetPassword = async (req, db) => {
   req = validate(resetPasswordValidation, req);
 
   const [email] = await db.execute("SELECT * FROM users WHERE email = ?", [
@@ -280,7 +280,7 @@ const resetPassword = async (req) => {
   ]);
 };
 
-const logout = async (email) => {
+const logout = async (email, db) => {
   const [user] = await db.execute("SELECT * FROM users WHERE email = ?", [
     email,
   ]);
@@ -296,7 +296,7 @@ const logout = async (email) => {
   await db.execute("UPDATE users SET token = ? WHERE email = ?", [null, email]);
 };
 
-const uploadImageProfile = async (email, fileName) => {
+const uploadImageProfile = async (email, fileName, db) => {
   const [users] = await db.execute("SELECT * FROM users WHERE email = ?", [
     email,
   ]);
@@ -318,7 +318,7 @@ const uploadImageProfile = async (email, fileName) => {
   return image[0];
 };
 
-const getDonorHistory = async (email) => {
+const getDonorHistory = async (email, db) => {
   if (!email) {
     throw new RespondError(404, "User not found");
   }

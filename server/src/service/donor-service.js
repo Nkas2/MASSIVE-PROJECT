@@ -5,7 +5,7 @@ import { organizedData } from "../lib/transformdata.js";
 import { emailValidation } from "../validation/user-validation.js";
 import { validate } from "../validation/validation.js";
 
-const getAllPmi = async (key) => {
+const getAllPmi = async (key, db) => {
   key = `%${key}%`;
   const [pmi] = await db.execute(
     "SELECT pm.id, pm.name, pd.image, pd.location FROM pmi_details pd JOIN pmi pm where pm.id = pd.pmi_id AND( pm.name LIKE ? OR pd.location LIKE ?) order by name asc",
@@ -15,7 +15,7 @@ const getAllPmi = async (key) => {
   return pmi;
 };
 
-const getDetailPmi = async (id) => {
+const getDetailPmi = async (id, db) => {
   const [pmi] = await db.execute(
     "SELECT pm.id, pm.name, pd.location, pd.operational, pd.start , pd.end, pd.description, pd.lng, pd.lat FROM pmi pm JOIN pmi_details pd ON pm.id = pd.pmi_id WHERE pm.id = ?",
     [id]
@@ -28,7 +28,7 @@ const getDetailPmi = async (id) => {
   return pmi[0];
 };
 
-const getEvent = async () => {
+const getEvent = async (db) => {
   const [event] = await db.execute(
     "SELECT id,name,city, date, start, end, 0 as remind FROM events ORDER BY date desc"
   );
@@ -36,7 +36,7 @@ const getEvent = async () => {
   return event;
 };
 
-const getEventWithAuth = async (email) => {
+const getEventWithAuth = async (email, db) => {
   email = validate(emailValidation, email);
 
   const [emailInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
@@ -55,7 +55,7 @@ const getEventWithAuth = async (email) => {
   return event;
 };
 
-const reminderMe = async (email, eventId) => {
+const reminderMe = async (email, eventId, db) => {
   email = validate(emailValidation, email);
 
   if (!eventId) {
@@ -93,7 +93,7 @@ const reminderMe = async (email, eventId) => {
   );
 };
 
-const eventDetail = async (eventId) => {
+const eventDetail = async (eventId, db) => {
   if (!eventId) {
     throw new RespondError(404, "Please input event id in body");
   }
@@ -112,7 +112,7 @@ const eventDetail = async (eventId) => {
   return event[0];
 };
 
-const eventDetailWithAuth = async (eventId, email) => {
+const eventDetailWithAuth = async (eventId, email, db) => {
   if (!eventId) {
     throw new RespondError(404, "Please input event id in body");
   }
@@ -146,7 +146,7 @@ const eventDetailWithAuth = async (eventId, email) => {
   return eventa[0];
 };
 
-const deleteRemind = async (email, eventId) => {
+const deleteRemind = async (email, eventId, db) => {
   const [user] = await db.execute("SELECT * FROM users WHERE email = ?", [
     email,
   ]);
@@ -178,7 +178,7 @@ const deleteRemind = async (email, eventId) => {
   );
 };
 
-const getStockBlood = async (pmiId) => {
+const getStockBlood = async (pmiId, db) => {
   if (!pmiId) {
     throw new RespondError(400, "Bad Request");
   }
