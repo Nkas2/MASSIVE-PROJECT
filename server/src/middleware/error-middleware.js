@@ -4,7 +4,7 @@ import { TrasactionError } from "../error/transaction-error.js";
 const errorMiddleware = (err, req, res, next) => {
   if (err instanceof RespondError || err instanceof TrasactionError) {
     res
-      .status(err.status)
+      .status(Number(err.status))
       .json({
         errors: err.message,
       })

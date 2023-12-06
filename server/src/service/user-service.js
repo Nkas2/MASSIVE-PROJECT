@@ -172,7 +172,7 @@ const editDetailUsers = async (req, email, db) => {
     email,
   ]);
 
-  if (email.length === 0) {
+  if (emailInDb.length === 0) {
     throw new RespondError("404", "User Not Found");
   }
 
@@ -181,11 +181,11 @@ const editDetailUsers = async (req, email, db) => {
     [
       req.name,
       req.phone_number,
-      req.city,
-      req.gender,
-      req.no_reg_pmi,
-      req.blood_type,
-      req.rhesus,
+      req.city || null,
+      req.gender || null,
+      req.no_reg_pmi || null,
+      req.blood_type || null,
+      req.rhesus || null,
       emailInDb[0].id,
     ]
   );
