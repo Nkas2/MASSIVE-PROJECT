@@ -153,12 +153,12 @@ const getUserEdit = async (email, db) => {
     email,
   ]);
 
-  if (email.length === 0) {
+  if (emailInDb.length === 0) {
     throw new RespondError(404, "User Not Found");
   }
 
   const [user] = await db.execute(
-    "SELECT user_details.name, user_details.no_reg_pmi, user_details.phone_number, user_details.gender, blood_types.blood_type, rhesus.rhs as rhesus, user_details.city, user_details.image FROM users JOIN user_details ON users.id = user_details.user_id JOIN blood_types ON user_details.id_blood_type = blood_types.id JOIN rhesus ON user_details.id_rhesus = rhesus.id where users.email = ?",
+    "SELECT user_details.name, user_details.no_reg_pmi, user_details.phone_number, user_details.gender, blood_types.blood_type, rhesus.rhs as rhesus, user_details.city, user_details.image FROM users left JOIN user_details ON users.id = user_details.user_id left JOIN blood_types ON user_details.id_blood_type = blood_types.id left JOIN rhesus ON user_details.id_rhesus = rhesus.id where users.email =  = ?",
     [email]
   );
 
@@ -210,7 +210,7 @@ const getUser = async (email, db) => {
   }
 
   const [user] = await db.execute(
-    "SELECT usr.name,usr.no_reg_pmi, usr.image, blood_types.blood_type, rhesus.rhs as rhesus, usr.city FROM user_details usr JOIN users user ON user.id = usr.user_id JOIN blood_types ON usr.id_blood_type = blood_types.id JOIN rhesus ON usr.id_rhesus = rhesus.id WHERE user.email = ?",
+    "SELECT usr.name,usr.no_reg_pmi, usr.image, blood_types.blood_type, rhesus.rhs as rhesus, usr.city FROM user_details usr left JOIN users user ON user.id = usr.user_id left JOIN blood_types ON usr.id_blood_type = blood_types.id left JOIN rhesus ON usr.id_rhesus = rhesus.id WHERE user.email =  = ?",
     [email]
   );
 
