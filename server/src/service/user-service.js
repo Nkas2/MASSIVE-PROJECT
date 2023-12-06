@@ -11,12 +11,12 @@ import {
 import { RespondError } from "../error/ressponse-error.js";
 import { TrasactionError } from "../error/transaction-error.js";
 import bcrypt from "bcrypt";
-import db from "../application/db.js";
 import { generateAccessToken, generateToken } from "../lib/token/token.js";
 import { sendEmail } from "../lib/email/email.js";
 import { generateResetCode } from "../lib/token/reset-token.js";
+import getConnection from "../application/db.js";
 
-const register = async (request) => {
+const register = async (request, db) => {
   request = validate(registerUserValidation, request);
   if (request.password !== request.conf_password) {
     throw new RespondError(
@@ -55,6 +55,7 @@ const register = async (request) => {
   } catch (error) {
     throw new TrasactionError(500, "Server Error");
   }
+  db.release();
 };
 
 const login = async (request) => {
