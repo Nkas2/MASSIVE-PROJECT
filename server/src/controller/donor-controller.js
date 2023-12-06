@@ -53,7 +53,10 @@ const getEvent = async (req, res, next) => {
         })
         .end();
     }
-    const result = await donorService.getEventWithAuth(req.user.email);
+    const result = await donorService.getEventWithAuth(
+      req.user.email,
+      connection
+    );
     res.status(200).json({
       data: result,
     });
@@ -100,7 +103,8 @@ const eventDetail = async (req, res, next) => {
 
     const result = await donorService.eventDetailWithAuth(
       req.params.id,
-      req.user.email
+      req.user.email,
+      connection
     );
     res.status(200).json({
       data: result,
