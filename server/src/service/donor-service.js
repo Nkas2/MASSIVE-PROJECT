@@ -1,4 +1,3 @@
-import db from "../application/db.js";
 import { RespondError } from "../error/ressponse-error.js";
 import { ubahIsiArray } from "../lib/changeArray.js";
 import { modify } from "../lib/modify.js";

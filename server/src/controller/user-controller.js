@@ -2,15 +2,22 @@ import db from "../application/db.js";
 import { RespondError } from "../error/ressponse-error.js";
 import userService from "../service/user-service.js";
 import tokenService from "../service/token-service.js";
+import getConnection from "../application/db.js";
 
 const register = async (req, res, next) => {
+  let connection;
   try {
-    await userService.register(req.body);
+    connection = await getConnection();
+    await userService.register(req.body, connection);
     res.status(200).json({
       data: "OK",
     });
   } catch (error) {
     next(error);
+  } finally {
+    if (connection) {
+      connection.release(); // Release the connection back to the pool
+    }
   }
 };
 
