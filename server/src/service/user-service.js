@@ -15,6 +15,7 @@ import { generateAccessToken, generateToken } from "../lib/token/token.js";
 import { sendEmail } from "../lib/email/email.js";
 import { generateResetCode } from "../lib/token/reset-token.js";
 import getConnection from "../application/db.js";
+import { generateCOdeToken } from "../lib/token/code-token.js";
 
 const register = async (request, db) => {
   request = validate(registerUserValidation, request);
@@ -256,8 +257,10 @@ const verifyCodeResetPassoword = async (code, db) => {
   await db.execute("DELETE FROM reset_password_token WHERE token = ?", [code]);
 
   email = email[0].email;
+
+  const token = generateCOdeToken({ email: email });
   return {
-    email,
+    token,
   };
 };
 
