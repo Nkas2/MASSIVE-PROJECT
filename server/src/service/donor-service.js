@@ -30,7 +30,7 @@ const getDetailPmi = async (id, db) => {
 
 const getEvent = async (db) => {
   const [event] = await db.execute(
-    "SELECT id,name,city, DATE_FORMAT(date, '%e %M %Y %H:%i') AS date, start, end, 0 as remind FROM events ORDER BY date desc"
+    "SELECT id,name,city, SELECT DATE_FORMAT('2023-12-02T00:00:00.000Z', '%Y-%m-%d %H:%i:%s') AS formatted_date, start, end, 0 as remind FROM events ORDER BY date desc"
   );
 
   return event;
@@ -48,7 +48,7 @@ const getEventWithAuth = async (email, db) => {
   }
 
   const [event] = await db.execute(
-    "SELECT e.id, e.name, DATE_FORMAT(e.date, '%e %M %Y %H:%i') AS date, e.start, e.end, CASE WHEN rm.user_id IS NOT NULL THEN true ELSE false END AS remind FROM events e LEFT JOIN reminder_me rm ON e.id = rm.event_id AND rm.user_id = (select id from users where email = ?) ORDER BY e.date DESC",
+    "SELECT e.id, e.name, SELECT DATE_FORMAT('2023-12-02T00:00:00.000Z', '%Y-%m-%d %H:%i:%s') AS formatted_date , e.start, e.end, CASE WHEN rm.user_id IS NOT NULL THEN true ELSE false END AS remind FROM events e LEFT JOIN reminder_me rm ON e.id = rm.event_id AND rm.user_id = (select id from users where email = ?) ORDER BY e.date DESC",
     [email]
   );
 
