@@ -91,8 +91,8 @@ export const SignUp = () => {
           </Form>
 
           <div className="flex items-center">
-            <p>Sudah punya akun ? </p>{' '}
-            <Link to={'/login'} className="text-primary">
+            <p className="font-bold">Sudah punya akun ? </p>{' '}
+            <Link to={'/login'} className="text-primary font-bold">
               Sign In
             </Link>
           </div>
