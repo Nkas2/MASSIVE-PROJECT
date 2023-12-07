@@ -12,6 +12,8 @@ export default {
         primary: '#A21D21',
         secondary: '#F38596',
         customGray: '#969696',
+        greyButton: '#404040',
+        greyButtonHover: '#2D2D2D',
       },
     },
   },
