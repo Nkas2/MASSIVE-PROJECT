@@ -29,12 +29,12 @@ const emailValidation = Joi.string().email().required();
 
 const editDetailUserValidation = Joi.object({
   name: Joi.string(),
-  no_reg_pmi: Joi.string(),
+  no_reg_pmi: Joi.string().empty(null),
   phone_number: Joi.string().pattern(new RegExp("^[0-9]{8,15}$")),
-  gender: Joi.string().valid("pria", "perempuan"),
-  blood_type: Joi.string().valid("A", "B", "AB", "O"),
-  rhesus: Joi.string().valid("+", "-"),
-  city: Joi.string(),
+  gender: Joi.string().valid("pria", "perempuan").empty(null),
+  blood_type: Joi.string().valid("A", "B", "AB", "O").empty(null),
+  rhesus: Joi.string().valid("+", "-").empty(null),
+  city: Joi.string().empty(null),
 });
 
 const codeValidation = Joi.string()
