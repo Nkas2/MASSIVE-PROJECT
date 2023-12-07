@@ -20,6 +20,7 @@ export const resetPasswordMiddleware = async (req, res, next) => {
         .end();
     }
     req.body.email = decoded.email;
+    console.log(req.body.emai);
     next();
   });
 };
