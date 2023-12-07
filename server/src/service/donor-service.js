@@ -99,7 +99,7 @@ const eventDetail = async (eventId, db) => {
   }
 
   const [event] = await db.execute(
-    "SELECT id, name, city, location, date, start, end, description, image, lng, lat FROM events WHERE id = ?",
+    "SELECT id, name, city, location, DATE_FORMAT(date, '%e %M %Y') AS date, start, end, description, image, lng, lat FROM events WHERE id = ?",
     [eventId]
   );
 
@@ -118,7 +118,7 @@ const eventDetailWithAuth = async (eventId, email, db) => {
   }
 
   const [event] = await db.execute(
-    "SELECT id, name, city, location, date, start, end, description, image, lng, lat FROM events WHERE id = ?",
+    "SELECT id, name, city, location, DATE_FORMAT(date, '%e %M %Y') AS date, start, end, description, image, lng, lat FROM events WHERE id = ?",
     [eventId]
   );
 
