@@ -2,6 +2,7 @@ import express from "express";
 import userController from "../controller/user-controller.js";
 import donorController from "../controller/donor-controller.js";
 import { eventMiddleware } from "../middleware/event-middleware.js";
+import { resetPasswordMiddleware } from "../middleware/reset-password-middleware.js";
 
 const publicRoutes = new express.Router();
 
@@ -12,7 +13,11 @@ publicRoutes.post(
   "/api/users/reset/code",
   userController.verifyCodeResetPassoword
 );
-publicRoutes.post("/api/users/reset/password", userController.resetPassword);
+publicRoutes.post(
+  "/api/users/reset/password",
+  resetPasswordMiddleware,
+  userController.resetPassword
+);
 
 // pmi
 publicRoutes.get("/api/pmi", donorController.getAllPmi);
