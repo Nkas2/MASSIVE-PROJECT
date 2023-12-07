@@ -178,10 +178,10 @@ const editDetailUsers = async (req, email, db) => {
   }
 
   const [updateUserDetails] = await db.execute(
-    "UPDATE user_details SET name = ?, phone_number = ?, city = ?, gender = ? , no_reg_pmi = ? , id_blood_type = (SELECT id FROM blood_types WHERE blood_type = ? ), id_rhesus = (SELECT id FROM rhesus WHERE rhs = ? ) WHERE user_id = ?",
+    "UPDATE user_details SET name = ?, phone_number = ?, city = ?, gender = ? , no_reg_pmi = COALESCE(?, NULL) , id_blood_type = COALESCE((SELECT id FROM blood_types WHERE blood_type = ?), NULL), id_rhesus = COALESCE((SELECT id FROM rhesus WHERE rhs = ?), NULL) WHERE user_id = ?",
     [
-      req.name,
-      req.phone_number,
+      req.name || null,
+      req.phone_number || null,
       req.city || null,
       req.gender || null,
       req.no_reg_pmi || null,
@@ -192,7 +192,7 @@ const editDetailUsers = async (req, email, db) => {
   );
 
   const [selectedUser] = await db.execute(
-    "SELECT usr.name, usr.no_reg_pmi, usr.phone_number, usr.gender, bts.blood_type, rhs.rhs as rhesus, usr.city FROM user_details usr JOIN rhesus rhs ON usr.id_rhesus = rhs.id JOIN blood_types bts ON usr.id_blood_type = bts.id WHERE user_id = ?",
+    "SELECT usr.name, usr.no_reg_pmi, usr.phone_number, usr.gender, bts.blood_type, rhs.rhs as rhesus, usr.city FROM user_details usr left JOIN rhesus rhs ON usr.id_rhesus = rhs.id left JOIN blood_types bts ON usr.id_blood_type = bts.id WHERE user_id = ?",
     [emailInDb[0].id]
   );
 
