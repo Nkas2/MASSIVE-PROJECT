@@ -11,12 +11,12 @@ import {
 import { RespondError } from "../error/ressponse-error.js";
 import { TrasactionError } from "../error/transaction-error.js";
 import bcrypt from "bcrypt";
-import db from "../application/db.js";
 import { generateAccessToken, generateToken } from "../lib/token/token.js";
 import { sendEmail } from "../lib/email/email.js";
 import { generateResetCode } from "../lib/token/reset-token.js";
+import getConnection from "../application/db.js";
 
-const register = async (request) => {
+const register = async (request, db) => {
   request = validate(registerUserValidation, request);
   if (request.password !== request.conf_password) {
     throw new RespondError(
@@ -55,9 +55,10 @@ const register = async (request) => {
   } catch (error) {
     throw new TrasactionError(500, "Server Error");
   }
+  db.release();
 };
 
-const login = async (request) => {
+const login = async (request, db) => {
   request = validate(loginUserValidation, request);
 
   const [resultUser] = await db.execute(
@@ -83,6 +84,7 @@ const login = async (request) => {
     email: resultUser[0].email,
     name: resultUser[0].name,
     phone_number: resultUser[0].phone_number,
+    image: resultUser[0].image,
   });
 
   const accessToken = generateAccessToken({
@@ -90,6 +92,7 @@ const login = async (request) => {
     email: resultUser[0].email,
     name: resultUser[0].name,
     phone_number: resultUser[0].phone_number,
+    image: resultUser[0].image,
   });
 
   const result = await db.execute("UPDATE users SET token = ? WHERE id = ?", [
@@ -103,7 +106,7 @@ const login = async (request) => {
   };
 };
 
-const chagePassword = async (request, email) => {
+const chagePassword = async (request, email, db) => {
   request = validate(changePasswordValidation, request);
 
   const [user] = await db.execute("SELECT * FROM users WHERE email = ?", [
@@ -143,33 +146,33 @@ const chagePassword = async (request, email) => {
   );
 };
 
-const getUserEdit = async (email) => {
+const getUserEdit = async (email, db) => {
   email = validate(emailValidation, email);
 
   const [emailInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
     email,
   ]);
 
-  if (email.length === 0) {
+  if (emailInDb.length === 0) {
     throw new RespondError(404, "User Not Found");
   }
 
   const [user] = await db.execute(
-    "SELECT user_details.name, user_details.no_reg_pmi, user_details.phone_number, user_details.gender, blood_types.blood_type, rhesus.rhs as rhesus, user_details.city, user_details.image FROM users JOIN user_details ON users.id = user_details.user_id JOIN blood_types ON user_details.id_blood_type = blood_types.id JOIN rhesus ON user_details.id_rhesus = rhesus.id where users.email = ?",
+    "SELECT user_details.name, user_details.no_reg_pmi, user_details.phone_number, user_details.gender, blood_types.blood_type, rhesus.rhs as rhesus, user_details.city, user_details.image FROM users left JOIN user_details ON users.id = user_details.user_id left JOIN blood_types ON user_details.id_blood_type = blood_types.id left JOIN rhesus ON user_details.id_rhesus = rhesus.id where users.email = ?",
     [email]
   );
 
   return user[0];
 };
 
-const editDetailUsers = async (req, email) => {
+const editDetailUsers = async (req, email, db) => {
   req = validate(editDetailUserValidation, req);
 
   const [emailInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
     email,
   ]);
 
-  if (email.length === 0) {
+  if (emailInDb.length === 0) {
     throw new RespondError("404", "User Not Found");
   }
 
@@ -178,11 +181,11 @@ const editDetailUsers = async (req, email) => {
     [
       req.name,
       req.phone_number,
-      req.city,
-      req.gender,
-      req.no_reg_pmi,
-      req.blood_type,
-      req.rhesus,
+      req.city || null,
+      req.gender || null,
+      req.no_reg_pmi || null,
+      req.blood_type || null,
+      req.rhesus || null,
       emailInDb[0].id,
     ]
   );
@@ -195,7 +198,7 @@ const editDetailUsers = async (req, email) => {
   return selectedUser[0];
 };
 
-const getUser = async (email) => {
+const getUser = async (email, db) => {
   email = validate(emailValidation, email);
 
   const [emailInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
@@ -207,14 +210,14 @@ const getUser = async (email) => {
   }
 
   const [user] = await db.execute(
-    "SELECT usr.name,usr.no_reg_pmi, usr.image, blood_types.blood_type, rhesus.rhs as rhesus, usr.city FROM user_details usr JOIN users user ON user.id = usr.user_id JOIN blood_types ON usr.id_blood_type = blood_types.id JOIN rhesus ON usr.id_rhesus = rhesus.id WHERE user.email = ?",
+    "SELECT usr.name,usr.no_reg_pmi, usr.image, blood_types.blood_type, rhesus.rhs as rhesus, usr.city FROM user_details usr left JOIN users user ON user.id = usr.user_id left JOIN blood_types ON usr.id_blood_type = blood_types.id left JOIN rhesus ON usr.id_rhesus = rhesus.id WHERE user.email = ?",
     [email]
   );
 
   return user[0];
 };
 
-const sendEmailForResetPassword = async (email) => {
+const sendEmailForResetPassword = async (email, db) => {
   email = validate(emailValidation, email);
 
   const [userInDb] = await db.execute("SELECT * FROM users WHERE email = ?", [
@@ -238,7 +241,7 @@ const sendEmailForResetPassword = async (email) => {
   };
 };
 
-const verifyCodeResetPassoword = async (code) => {
+const verifyCodeResetPassoword = async (code, db) => {
   code = validate(codeValidation, code);
 
   let [email] = await db.execute(
@@ -258,7 +261,7 @@ const verifyCodeResetPassoword = async (code) => {
   };
 };
 
-const resetPassword = async (req) => {
+const resetPassword = async (req, db) => {
   req = validate(resetPasswordValidation, req);
 
   const [email] = await db.execute("SELECT * FROM users WHERE email = ?", [
@@ -277,7 +280,7 @@ const resetPassword = async (req) => {
   ]);
 };
 
-const logout = async (email) => {
+const logout = async (email, db) => {
   const [user] = await db.execute("SELECT * FROM users WHERE email = ?", [
     email,
   ]);
@@ -293,7 +296,7 @@ const logout = async (email) => {
   await db.execute("UPDATE users SET token = ? WHERE email = ?", [null, email]);
 };
 
-const uploadImageProfile = async (email, fileName) => {
+const uploadImageProfile = async (email, fileName, db) => {
   const [users] = await db.execute("SELECT * FROM users WHERE email = ?", [
     email,
   ]);
@@ -315,6 +318,27 @@ const uploadImageProfile = async (email, fileName) => {
   return image[0];
 };
 
+const getDonorHistory = async (email, db) => {
+  if (!email) {
+    throw new RespondError(404, "User not found");
+  }
+
+  const [user] = await db.execute("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
+
+  if (user.length === 0) {
+    throw new RespondError(404, "NOT FOUND");
+  }
+
+  const [history] = await db.execute(
+    `select DATE_FORMAT(dh.date, '%e %M %Y %H:%i') AS date, pmi.name, dh.status, concat_ws("", blood_types.blood_type, rhesus.rhs) as goldar from donor_history dh right join pmi on pmi.id = dh.pmi_id join users on dh.user_id = users.id join user_details on users.id = user_details.user_id left join blood_types on user_details.id_blood_type = blood_types.id left join rhesus on user_details.id_rhesus = rhesus.id where dh.user_id = (select id from users where email = ?)`,
+    [email]
+  );
+
+  return history;
+};
+
 export default {
   register,
   login,
@@ -327,4 +351,5 @@ export default {
   resetPassword,
   logout,
   uploadImageProfile,
+  getDonorHistory,
 };

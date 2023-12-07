@@ -17,6 +17,7 @@ import { Login } from './page/Login.jsx';
 import { SignUp } from './page/SignUp.jsx';
 import { LupaPassword } from './page/LupaPassword.jsx';
 import { DetailEvent } from './page/JadwalDonor/DetailEvent.jsx';
+import { Profile } from './page/Profile/Profile.jsx';
 // import { CssBaseline } from '@mui/material';
 
 const router = createBrowserRouter([
