@@ -5,10 +5,10 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 export const Footer = () => {
   return (
     <>
-      <div id="foot" className="relative">
+      <div id="foot" className="relative container">
         {/* logo */}
 
-        <div className="ml-14 absolute mt-96">
+        <div className="ml-14 absolute mt-[250px]">
           <div className="flex items-center">
             <img src="./assets/logo.svg" alt="" className="w-[38px] h-[52px]" />
             <h1 className="pl-2 font-bold text-white text-3xl">BLOODBAGS</h1>
@@ -22,7 +22,7 @@ export const Footer = () => {
 
         {/* item */}
 
-        <div className="absolute mt-[364px] ml-[459px]">
+        <div className="absolute mt-[250px] ml-96">
           <div className="flex">
             <ul className="list-none">
               <div className="flex flex-grow-1 gap-32">

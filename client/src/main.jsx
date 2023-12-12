@@ -16,7 +16,11 @@ import { AuthLayout } from './layout/Auth/AuthLayout.jsx';
 import { Login } from './page/Login.jsx';
 import { SignUp } from './page/SignUp.jsx';
 import { LupaPassword } from './page/LupaPassword.jsx';
+import { HomeAuthLayout} from './layout/Auth/HomeAuthLayout.jsx';
 import { Profile } from './page/Profile/Profile.jsx';
+import { EditProfile } from './page/Profile/EditProfile.jsx'
+import { EditPassword } from './page/Profile/EditPassword.jsx';
+import { HomeAuth } from './page/Homepage/HomeAuth.jsx'
 // import { CssBaseline } from '@mui/material';
 
 const router = createBrowserRouter([
@@ -53,6 +57,36 @@ const router = createBrowserRouter([
       {
         path: '/lupaPassword',
         element: <LupaPassword />,
+      },
+    ],
+  },
+  {
+    path: '/',
+    element: <HomeAuthLayout />,
+    children: [
+      {
+        path: '/auth',
+        element: <HomeAuth/>,
+      },
+      {
+        path: '/auth/jadwalDonor',
+        element: <JadwalDonor/>,
+      },
+      {
+        path: '/auth/stokDarah',
+        element: <StokDarah/>,
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
+      },
+      {
+        path: '/editProfile',
+        element: <EditProfile/>,
+      },
+      {
+        path: '/editPassword',
+        element: <EditPassword/>,
       },
     ],
   },

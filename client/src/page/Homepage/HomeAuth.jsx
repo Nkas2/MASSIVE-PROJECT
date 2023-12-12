@@ -1,27 +1,27 @@
 import { Footer } from '../../components/Footer';
 import { Link } from 'react-router-dom';
 
-export const Home = () => {
-  return (
-    <>
-      <div className="bg-background w-full mx-auto">
+export const HomeAuth = () => {
+    return (
+        <>
+          <div className="bg-background w-full mx-auto">
         <div className="min-h-screen">
           {/* top */}
           <div className="flex mx-28 items-start justify-start pt-40 w-full mb-[650px]">
             {/* section 1 */}
             <section className="flex ">
               <div className="z-10">
-                <h3 className="text-black text-5xl font-bold">Welcome !</h3>
+                <h3 className="text-black text-5xl">Welcome !</h3>
                 <h1 className="text-primary text-9xl font-extrabold pt-7 tracking-tight">
                   Blood <span className="text-black">Bags</span>
                 </h1>
                 <div className="mt-14 flex items-center">
                   <Link to={'/jadwalDonor'}>
-                    <button className=" bg-primary rounded-3xl py-3 px-7 text-white text-base font-bold hover:bg-primaryHover focus:bg-primary">
+                    <button className=" bg-primary rounded-3xl py-3 px-7 text-white text-base font-bold">
                       Gabung Sekarang
                     </button>
                   </Link>
-                  <h4 className="pl-9 text-xl font-bold">
+                  <h4 className="pl-9 text-xl">
                     Gabung bersama kami dan temukan fitur <br />
                     menarik lainya !
                   </h4>
@@ -148,7 +148,8 @@ export const Home = () => {
             <img src="./assets/waves-footer.svg" alt="" className="w-full" />
           </div>
         </div>
-      </div>
-    </>
-  );
-};
+      </div>  
+        </>
+
+    )
+}

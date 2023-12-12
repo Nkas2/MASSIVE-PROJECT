@@ -14,6 +14,7 @@ export default {
         customGray: '#969696',
         greyButton: '#404040',
         greyButtonHover: '#2D2D2D',
+        primaryHover: '#7E161A',
       },
     },
   },
