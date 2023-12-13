@@ -35,10 +35,10 @@ export const CityCard = ({ name, location, img }) => {
 
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white max-w-7xl p-8 rounded-2xl flex">
+            <div className="bg-white max-w-5xl p-8 rounded-2xl flex">
               <div className="flex-1 ml-14">
                 {/* btn */}
-                <div className="flex justify-end">
+                <div className="flex justify-start">
                   <button
                     className="flex text-base font-bold text-primary"
                     onClick={close}>

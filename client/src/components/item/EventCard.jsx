@@ -38,23 +38,23 @@ export const EventCard = () => {
           {/* place */}
           <div className="flex flex-col">
             <h1 className="text-xl font-bold">Itc Cempaka Mas Donor Darah</h1>
-            <p className="text-sm text-customGray">Kamis, 20 November 2023</p>
+            <p className="text-sm text-greyButton">Kamis, 20 November 2023</p>
           </div>
 
           {/* date */}
           <div>
-            <p className="text-sm text-customGray">Kamis, 09:00 - 14:00</p>
+            <p className="text-sm text-greyButton">Kamis, 09:00 - 14:00</p>
           </div>
 
           {/* city */}
           <div>
-            <p className="text-sm text-customGray">Jakarta Pusat</p>
+            <p className="text-sm text-greyButton">Jakarta Pusat</p>
           </div>
 
           {/* button */}
           <button
             className={`py-4 px-9 rounded-[30px] text-white ${
-              isClicked ? 'bg-primary' : 'bg-customGray'
+              isClicked ? 'bg-primary hover:bg-primaryHover' : 'bg-greyButton hover:bg-greyButtonHover'
             }`}
             onClick={handleClick}>
             {buttonText}
@@ -80,12 +80,12 @@ export const EventCard = () => {
               <div className="flex justify-center gap-16 pt-3">
                 <button
                   onClick={handleCancelConfirmation}
-                  className="mr-2 font-bold hover:bg-secondary px-4 rounded-xl">
+                  className="mr-2 font-bold hover:bg-greyButton hover:text-white  px-4 rounded-xl">
                   Batal
                 </button>
                 <button
                   onClick={handleConfirmCancellation}
-                  className="text-primary font-bold hover:bg-secondary px-4 rounded-xl">
+                  className="text-primary font-bold hover:bg-primary hover:text-white px-4 rounded-xl">
                   Ubah
                 </button>
               </div>
