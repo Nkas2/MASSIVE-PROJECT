@@ -1,7 +1,9 @@
 import { Footer } from '../../components/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="bg-background w-full mx-auto">
@@ -18,6 +20,7 @@ export const Home = () => {
                 <div className="mt-14 flex items-center">
                   <Link to={'/jadwalDonor'}>
                     <button className=" bg-primary rounded-3xl py-3 px-7 text-white text-base font-bold hover:bg-primaryHover focus:bg-primary">
+
                       Gabung Sekarang
                     </button>
                   </Link>
@@ -83,7 +86,9 @@ export const Home = () => {
                 </div>
 
                 <div className="pl-12 pt-8">
-                  <Link to={'/stokDarah'}>
+                  <Link
+                    to={'/stokDarah'}
+                    onClick={() => navigate.push('/stokDarah#stokdarah')}>
                     <button className="px-9 py-3 bg-primary rounded-[30px] font-bold text-[20px] text-white">
                       Stok Darah
                     </button>

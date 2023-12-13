@@ -1,4 +1,7 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const sendEmail = async (emailUser, resetToken) => {
   const transport = nodemailer.createTransport({
@@ -6,7 +9,7 @@ export const sendEmail = async (emailUser, resetToken) => {
     port: 587,
     auth: {
       user: "bagsblood48@gmail.com",
-      pass: "boxu ccgp mkvj jaii",
+      pass: process.env.EMAIL_PASS,
     },
   });
 

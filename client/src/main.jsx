@@ -17,6 +17,7 @@ import { Login } from './page/Login.jsx';
 import { SignUp } from './page/SignUp.jsx';
 import { LupaPassword } from './page/LupaPassword.jsx';
 import { HomeAuthLayout} from './layout/Auth/HomeAuthLayout.jsx';
+import { DetailEvent } from './page/JadwalDonor/DetailEvent.jsx';
 import { Profile } from './page/Profile/Profile.jsx';
 import { EditProfile } from './page/Profile/EditProfile.jsx'
 import { EditPassword } from './page/Profile/EditPassword.jsx';
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/jadwalDonor',
         element: <JadwalDonor />,
+      },
+      {
+        path: '/jadwalDonor/detailEvent',
+        element: <DetailEvent />,
       },
       {
         path: '/stokDarah',
