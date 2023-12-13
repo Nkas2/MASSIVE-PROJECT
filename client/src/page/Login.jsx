@@ -61,7 +61,7 @@ export const Login = () => {
               </Link>
             </div>
 
-            <Link to={'/'} className="pt-4">
+            <Link to={'/auth'} className="pt-4">
               <ButtonAuth text={'Log In'} />
             </Link>
           </Form>
