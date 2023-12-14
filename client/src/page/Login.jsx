@@ -1,6 +1,6 @@
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { Form, Link } from 'react-router-dom';
-import { ButtonAuth } from '../components/item/ButtonAuth';
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import { Link } from "react-router-dom";
+import { ButtonAuth } from "../components/item/ButtonAuth";
 
 export const Login = () => {
   return (
@@ -8,7 +8,7 @@ export const Login = () => {
       <div className="w-full h-full flex justify-center bg-white">
         <div className="w-[600px] flex flex-col items-center">
           {/* btn */}
-          <Link to={'/'} className="flex justify-end mt-5 pr-8 w-full">
+          <Link to={"/"} className="flex justify-end mt-5 pr-8 w-full">
             <button className=" text-base font-bold text-primary">
               <KeyboardBackspaceIcon /> Go Back
             </button>
@@ -32,7 +32,7 @@ export const Login = () => {
             </h1>
           </div>
 
-          <Form method="post" className="mt-6 mb-3">
+          <form className="mt-6 mb-3">
             <div>
               <div className="mb-5">
                 <h1>Email</h1>
@@ -54,21 +54,21 @@ export const Login = () => {
                 />
               </div>
 
-              <Link to={'/lupaPassword'}>
+              <Link to={"/lupaPassword"}>
                 <div className="mb-12 text-right">
                   <p>Lupa Password?</p>
                 </div>
               </Link>
             </div>
 
-            <Link to={'/auth'} className="pt-4">
-              <ButtonAuth text={'Log In'} />
+            <Link to={"/auth"} className="pt-4">
+              <ButtonAuth text={"Log In"} />
             </Link>
-          </Form>
+          </form>
           <div className="flex items-center pt">
             <p className="font-[600]">
-              Belum punya akun ?{' '}
-              <Link to={'/signup'} className="text-primary">
+              Belum punya akun ?{" "}
+              <Link to={"/signup"} className="text-primary">
                 Sign Up
               </Link>
             </p>

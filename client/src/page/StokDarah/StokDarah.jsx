@@ -1,5 +1,5 @@
-import { Footer } from '../../components/Footer';
-import { CityCard } from '../../components/item/CityCard';
+import { Footer } from "../../components/Footer";
+import { CityCard } from "../../components/item/CityCard";
 
 export const StokDarah = () => {
   return (
@@ -10,30 +10,27 @@ export const StokDarah = () => {
         </div>
         <div className="flex gap-20 pl-56 py-10 mb-24">
           <CityCard
-            name={'PMI Kota A'}
-            location={'Tangerang'}
-            img={'./assets/kota 1.png'}
+            name={"PMI Kota A"}
+            location={"Tangerang"}
+            img={"./assets/kota 1.png"}
           />
 
           <CityCard
-            name={'PMI Kota A'}
-            location={'Jakarta'}
-            img={'./assets/kota 2.png'}
+            name={"PMI Kota A"}
+            location={"Jakarta"}
+            img={"./assets/kota 2.png"}
           />
 
           <CityCard
-            name={'PMI Kota A'}
-            location={'Batam'}
-            img={'./assets/kota 3.png'}
+            name={"PMI Kota A"}
+            location={"Batam"}
+            img={"./assets/kota 3.png"}
           />
         </div>
       </section>
 
       {/* footer */}
-      <footer className="">
-        <Footer />
-        <img src="./assets/waves-footer.svg" alt="" className="w-full" />
-      </footer>
+      <Footer />
     </>
   );
 };

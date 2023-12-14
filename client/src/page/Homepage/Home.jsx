@@ -1,26 +1,25 @@
-import { Footer } from '../../components/Footer';
-import { Link, useNavigate } from 'react-router-dom';
+import { Footer } from "../../components/Footer";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <div className="bg-background w-full mx-auto">
-        <div className="min-h-screen">
+      <div className="bg-background flex w-full mx-auto">
+        <div className="min-h-screen relative w-full max-w-[1440px] mx-auto">
           {/* top */}
-          <div className="flex mx-28 items-start justify-start pt-40 w-full mb-[650px]">
+          <div className="flex mx-28  items-start justify-start pt-40 max-w-[1700px] mb-[650px]">
             {/* section 1 */}
-            <section className="flex ">
+            <section className="flex">
               <div className="z-10">
                 <h3 className="text-black text-5xl font-bold">Welcome !</h3>
                 <h1 className="text-primary text-9xl font-extrabold pt-7 tracking-tight">
                   Blood <span className="text-black">Bags</span>
                 </h1>
                 <div className="mt-14 flex items-center">
-                  <Link to={'/jadwalDonor'}>
+                  <Link to={"/jadwalDonor"}>
                     <button className=" bg-primary rounded-3xl py-3 px-7 text-white text-base font-bold hover:bg-primaryHover focus:bg-primary">
-
                       Gabung Sekarang
                     </button>
                   </Link>
@@ -32,16 +31,16 @@ export const Home = () => {
               </div>
 
               {/* img */}
-              <img
-                src="./assets/tangan-kantong darah.svg"
-                alt=""
-                className="absolute right-0 top-32"
-              />
             </section>
+            <img
+              src="./assets/tangan-kantong darah.svg"
+              alt=""
+              className="absolute w-full min-w-[700px] left-0 top-32"
+            />
           </div>
 
           {/* section 2 */}
-          <section className="flex mt-64">
+          <section className="flex relative mt-64 h-[600px] max-w-[1440px] w-full">
             <div className="pt-16 ml-24">
               <h1 className="text-[60px] font-bold">
                 Infromasi Donor <br />
@@ -54,7 +53,7 @@ export const Home = () => {
               </h3>
             </div>
 
-            <div className="right-0">
+            <div className="right-0 absolute">
               <img src="./assets/Ilustration-sec2.svg" alt="" />
             </div>
 
@@ -62,7 +61,7 @@ export const Home = () => {
             <img
               src="./assets/assets-sec2.svg"
               alt=""
-              className="absolute mt-96 z-0"
+              className="absolute z-100 -bottom-[500px]"
             />
           </section>
 
@@ -87,8 +86,9 @@ export const Home = () => {
 
                 <div className="pl-12 pt-8">
                   <Link
-                    to={'/stokDarah'}
-                    onClick={() => navigate.push('/stokDarah#stokdarah')}>
+                    to={"/stokDarah"}
+                    onClick={() => navigate.push("/stokDarah#stokdarah")}
+                  >
                     <button className="px-9 py-3 bg-primary rounded-[30px] font-bold text-[20px] text-white">
                       Stok Darah
                     </button>
@@ -148,12 +148,9 @@ export const Home = () => {
           </section>
 
           {/* footer */}
-          <div className="">
-            <Footer />
-            <img src="./assets/waves-footer.svg" alt="" className="w-full" />
-          </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
