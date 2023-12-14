@@ -36,7 +36,6 @@ export const EventCard = () => {
                 <img src="./assets/icon-calendar.svg" alt="" />
               </div>
             </div>
-
             {/* place */}
             <div className="flex flex-col">
               <h1 className="text-xl font-bold">Itc Cempaka Mas Donor Darah</h1>
@@ -86,12 +85,12 @@ export const EventCard = () => {
               <div className="flex justify-center gap-16 pt-3">
                 <button
                   onClick={handleCancelConfirmation}
-                  className="mr-2 font-bold hover:bg-secondary px-4 rounded-xl">
+                  className="mr-2 font-bold hover:bg-greyButton hover:text-white  px-4 rounded-xl">
                   Batal
                 </button>
                 <button
                   onClick={handleConfirmCancellation}
-                  className="text-primary font-bold hover:bg-secondary px-4 rounded-xl">
+                  className="text-primary font-bold hover:bg-primary hover:text-white px-4 rounded-xl">
                   Ubah
                 </button>
               </div>

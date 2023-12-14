@@ -15,6 +15,8 @@ export default {
         greyButton: '#404040',
         greyButtonHover: '#2D2D2D',
         primaryHover: '#7E161A',
+        tableprimary: '#D9D9D9',
+        tablesecondary: '#FEEFF2',
       },
     },
   },
