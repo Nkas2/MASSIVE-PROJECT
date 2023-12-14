@@ -1,10 +1,10 @@
-import { NavLink } from 'react-router-dom';
-import { ButtonSignIn } from './item/ButtonSignIn';
+import { NavLink } from "react-router-dom";
+import { ButtonSignIn } from "./item/ButtonSignIn";
 
 export const Navbar = () => {
   return (
-    <>
-      <div className="w-full px-24 bg-background flex justify-between items-center pb-3 pt-5">
+    <div className="w-full">
+      <div className="max-w-[1700px] mx-auto px-24 bg-background flex justify-between items-center pb-3 pt-5">
         {/* logo */}
         <div className="w-[30px] h-[40px] flex">
           <img src="./assets/logo.svg" alt="" />
@@ -15,62 +15,64 @@ export const Navbar = () => {
         </div>
 
         {/* navlink */}
-        <div className="ml-[425px]">
+        <div className="flex gap-8">
           <ul className="flex gap-[25px]">
             <NavLink
-              to={'/'}
+              to={"/"}
               className={({ isActive }) =>
                 isActive
-                  ? 'font-bold text-lg underline underline-offset-8 decoration-[4px] decoration-primary '
-                  : 'text-black text-lg font-medium cursor-pointer hover:text-primary hover:font-bold'
-              }>
-              <div class="group relative">
+                  ? "font-bold text-lg underline underline-offset-8 decoration-[4px] decoration-primary "
+                  : "text-black text-lg font-medium cursor-pointer hover:text-primary hover:font-bold"
+              }
+            >
+              <div className="group relative">
                 <li>Home</li>
-                <div class="bg-primary h-[3px] w-[0%] left-0 -bottom-[4px] absolute duration-300 group-hover:w-full"></div>
-              </div>
-            </NavLink>
-            
-            <NavLink
-              to={'/jadwalDonor'}
-              className={({ isActive }) =>
-                isActive
-                  ? 'font-bold text-lg underline underline-offset-8 decoration-[4px] decoration-primary '
-                  : 'text-black text-lg font-medium cursor-pointer hover:text-primary hover:font-bold'
-              }>
-              <div class="group relative">
-                <li>Jadwal Donor</li>
-                <div class="bg-primary h-[3px] w-[0%] left-0 -bottom-[4px] absolute duration-300 group-hover:w-full"></div>
+                <div className="bg-primary h-[3px] w-[0%] left-0 -bottom-[4px] absolute duration-300 group-hover:w-full"></div>
               </div>
             </NavLink>
 
             <NavLink
-              to={'/stokDarah'}
+              to={"/jadwalDonor"}
               className={({ isActive }) =>
                 isActive
-                  ? 'font-bold text-lg underline underline-offset-8 decoration-[4px] decoration-primary '
-                  : 'text-black text-lg font-medium cursor-pointer hover:text-primary hover:font-bold'
-              }>
-              <div class="group relative">
+                  ? "font-bold text-lg underline underline-offset-8 decoration-[4px] decoration-primary "
+                  : "text-black text-lg font-medium cursor-pointer hover:text-primary hover:font-bold"
+              }
+            >
+              <div className="group relative">
+                <li>Jadwal Donor</li>
+                <div className="bg-primary h-[3px] w-[0%] left-0 -bottom-[4px] absolute duration-300 group-hover:w-full"></div>
+              </div>
+            </NavLink>
+
+            <NavLink
+              to={"/stokDarah"}
+              className={({ isActive }) =>
+                isActive
+                  ? "font-bold text-lg underline underline-offset-8 decoration-[4px] decoration-primary "
+                  : "text-black text-lg font-medium cursor-pointer hover:text-primary hover:font-bold"
+              }
+            >
+              <div className="group relative">
                 <li>Stok Darah</li>
-                <div class="bg-primary h-[3px] w-[0%] left-0 -bottom-[4px] absolute duration-300 group-hover:w-full"></div>
+                <div className="bg-primary h-[3px] w-[0%] left-0 -bottom-[4px] absolute duration-300 group-hover:w-full"></div>
               </div>
             </NavLink>
             <a
               href="#foot"
-              className={({ isActive }) =>
-                isActive
-                  ? 'font-bold text-lg underline underline-offset-8 decoration-[4px] decoration-primary '
-                  : ''
-              }>
-              <div class="group relative">
-                <li className="text-black text-lg font-medium cursor-pointer hover:text-primary hover:font-bold">Tentang Kami</li>
-                <div class="bg-primary h-[3px] w-[0%] left-0 -bottom-[4px] absolute duration-300 group-hover:w-full"></div>
+              className="font-bold text-lg  ease-in-out duration-300 hover:underline-offset-auto decoration-[4px] decoration-primary"
+            >
+              <div className="group relative">
+                <li className="text-black text-lg font-medium cursor-pointer hover:text-primary hover:font-bold">
+                  Tentang Kami
+                </li>
+                <div className="bg-primary h-[3px] w-[0%] left-0 -bottom-[4px] absolute duration-300 group-hover:w-full"></div>
               </div>
             </a>
           </ul>
+          <ButtonSignIn />
         </div>
-        <ButtonSignIn />
       </div>
-    </>
+    </div>
   );
 };

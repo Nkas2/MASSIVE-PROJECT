@@ -1,5 +1,5 @@
-import { Footer } from '../../components/Footer';
-import { CardStokDarah } from '../../components/item/CardStokDarah';
+import { Footer } from "../../components/Footer";
+import { CityCard } from "../../components/item/CityCard";
 
 export const StokDarah = () => {
   return (
@@ -30,10 +30,7 @@ export const StokDarah = () => {
       </section>
 
       {/* footer */}
-      <footer className="">
-        <Footer />
-        <img src="./assets/waves-footer.svg" alt="" className="w-full" />
-      </footer>
+      <Footer />
     </>
   );
 };

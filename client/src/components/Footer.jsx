@@ -1,14 +1,17 @@
-import InstagramIcon from '@mui/icons-material/Instagram';
-import FacebookRounded from '@mui/icons-material/FacebookRounded';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookRounded from "@mui/icons-material/FacebookRounded";
+import TwitterIcon from "@mui/icons-material/Twitter";
 
 export const Footer = () => {
   return (
     <>
-      <div id="foot" className="relative container">
+      <div
+        id="foot"
+        className=" max-w-[1700px] mx-auto flex items-end justify-center gap-32 pb-10"
+      >
         {/* logo */}
 
-        <div className="ml-14 absolute mt-[250px]">
+        <div className=" ">
           <div className="flex items-center">
             <img src="./assets/logo.svg" alt="" className="w-[38px] h-[52px]" />
             <h1 className="pl-2 font-bold text-white text-3xl">BLOODBAGS</h1>
@@ -22,7 +25,7 @@ export const Footer = () => {
 
         {/* item */}
 
-        <div className="absolute mt-[250px] ml-96">
+        <div className="">
           <div className="flex">
             <ul className="list-none">
               <div className="flex flex-grow-1 gap-32">

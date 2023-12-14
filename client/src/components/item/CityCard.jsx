@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { useState } from "react";
+import CardModal from "../comp/atoms/CardModal";
 
 // eslint-disable-next-line react/prop-types
 export const CityCard = ({ name, location, img }) => {
@@ -17,9 +17,7 @@ export const CityCard = ({ name, location, img }) => {
     <>
       <div className="flex gap-20">
         {/* card 1 */}
-        <div
-          className="relative h-[355px] w-[258px] group cursor-pointer"
-          onClick={open}>
+        <div className="relative h-auto group cursor-pointer" onClick={open}>
           {/* background */}
           <div className="absolute rounded-2xl bg-gradient-to-b from-primary to-red-600 h-full w-full -rotate-6 group-hover:-rotate-12 transition-transform ease-in-out duration-300"></div>
           {/* img */}
@@ -34,68 +32,7 @@ export const CityCard = ({ name, location, img }) => {
         </div>
 
         {isOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white max-w-5xl p-8 rounded-2xl flex">
-              <div className="flex-1 ml-14">
-                {/* btn */}
-                <div className="flex justify-start">
-                  <button
-                    className="flex text-base font-bold text-primary"
-                    onClick={close}>
-                    <KeyboardBackspaceIcon /> Kembali
-                  </button>
-                </div>
-                {/* Konten modal */}
-                <h2 className="text-[40px] font-bold mb-4">{name}</h2>
-                <div className="border-b-2 w-[597px] mb-4">
-                  <ul className="list-none">
-                    <div className="flex flex-grow-1 gap-8 mb-10">
-                      <div className="flex flex-col gap-3">
-                        <li className="flex gap-2 font-bold text-primary">
-                          <img src="./assets/kalender.svg" alt="" />
-                          Jadwal
-                        </li>
-                        <li className="flex gap-2 font-bold text-primary">
-                          <img src="./assets/time.svg" alt="" />
-                          Jam
-                        </li>
-                        <li className="flex gap-2 font-bold text-primary">
-                          <img src="./assets/location.svg" alt="" />
-                          Lokasi
-                        </li>
-                      </div>
-
-                      <div className="flex flex-col gap-3">
-                        <li className="flex gap-2 font-bold">Senin - Jumat</li>
-                        <li className="flex gap-2 font-bold">09:00 - 12:00</li>
-                        <li className="flex gap-2 font-bold">{location}</li>
-                      </div>
-                    </div>
-                  </ul>
-                </div>
-
-                {/* deskripsi */}
-                <div className="mb-5">
-                  <h1 className="text-[40px] font-bold">Deskripsi</h1>
-                </div>
-                <div className="max-w-xl">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Aliquam, et? Sint rerum vero soluta necessitatibus tenetur,
-                    non perferendis quibusdam repudiandae, provident voluptatum
-                    doloribus, obcaecati repellat reprehenderit tempora delectus
-                    commodi mollitia!
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex-2">
-                <div className="ml-14">
-                  <img src="./assets/Basemap image.svg" alt="" />
-                </div>
-              </div>
-            </div>
-          </div>
+          <CardModal location={location} name={name} closeModal={close} />
         )}
       </div>
     </>

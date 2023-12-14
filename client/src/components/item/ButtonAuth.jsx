@@ -1,11 +1,16 @@
 // eslint-disable-next-line react/prop-types
-export const ButtonAuth = ({ text, func }) => {
+import CircularProgress from "@mui/material/CircularProgress";
+
+export const ButtonAuth = ({ isPending, text }) => {
   return (
     <button
-      onClick={func}
       type="submit"
-      className="w-full bg-primary py-3 rounded-full text-white text-lg font-bold cursor-pointer hover:bg-primaryHover focus:bg-primary">
-      {text}
+      className={`w-full bg-primary py-3 rounded-full text-white text-lg font-bold cursor-pointer ${
+        isPending ? "cursor-not-allowed" : ""
+      }`}
+      disabled={isPending}
+    >
+      {isPending ? <CircularProgress color="inherit" size={20} /> : text}
     </button>
   );
 };

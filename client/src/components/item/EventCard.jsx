@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import { Link } from "react-router-dom";
 
 export const EventCard = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -23,13 +23,13 @@ export const EventCard = () => {
     setConfirmationModal(false);
   };
 
-  const buttonText = isClicked ? 'Tersimpan' : 'Ingatkan Saya';
+  const buttonText = isClicked ? "Tersimpan" : "Ingatkan Saya";
 
   return (
     <>
-      <div className="flex flex-col pl-24 pt-7">
+      <div className="flex flex-col ">
         <Link to="/jadwalDonor/detailEvent">
-          <div className="flex items-center justify-around bg-white w-11/12 h-32 rounded-2xl ">
+          <div className="flex items-center justify-around bg-white h-32 rounded-2xl ">
             {/* icon */}
             <div className="flex">
               <div className="flex items-center justify-center bg-secondary rounded-full w-16 h-16">
@@ -55,12 +55,13 @@ export const EventCard = () => {
             {/* button */}
             <button
               className={`py-4 px-9 rounded-[30px] text-white ${
-                isClicked ? 'bg-primary' : 'bg-customGray'
+                isClicked ? "bg-primary" : "bg-customGray"
               }`}
               onClick={(e) => {
                 handleClick();
                 e.stopPropagation();
-              }}>
+              }}
+            >
               {buttonText}
             </button>
           </div>
@@ -71,7 +72,8 @@ export const EventCard = () => {
         <>
           <div
             className="fixed inset-0 bg-black bg-opacity-20 z-10"
-            onClick={handleCancelConfirmation}></div>
+            onClick={handleCancelConfirmation}
+          ></div>
           <div className="fixed inset-0 flex items-center justify-center z-20">
             <div className="w-[560px] h-[230px] bg-white p-5 rounded-2xl">
               <div className="flex justify-end">
@@ -85,12 +87,14 @@ export const EventCard = () => {
               <div className="flex justify-center gap-16 pt-3">
                 <button
                   onClick={handleCancelConfirmation}
-                  className="mr-2 font-bold hover:bg-greyButton hover:text-white  px-4 rounded-xl">
+                  className="mr-2 font-bold hover:bg-secondary px-4 rounded-xl"
+                >
                   Batal
                 </button>
                 <button
                   onClick={handleConfirmCancellation}
-                  className="text-primary font-bold hover:bg-primary hover:text-white px-4 rounded-xl">
+                  className="text-primary font-bold hover:bg-secondary px-4 rounded-xl"
+                >
                   Ubah
                 </button>
               </div>

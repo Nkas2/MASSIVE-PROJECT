@@ -1,10 +1,10 @@
-import { Form, Link } from 'react-router-dom';
-import { ButtonAuth } from '../components/item/ButtonAuth';
+import { Form, Link } from "react-router-dom";
+import { ButtonAuth } from "../components/item/ButtonAuth";
 
 export const LupaPassword = () => {
   return (
     <>
-      <div className="w-full h-full flex flex-col bg-white mr-56 pl-16">
+      <div className="w-full h-screen flex flex-col bg-white mr-56 pl-16">
         <div className="mt-10 mb-8">
           <h1 className="text-4xl font-bold mb-5">Lupa Password</h1>
 
@@ -26,18 +26,17 @@ export const LupaPassword = () => {
               />
             </div>
           </Form>
-
           <Link>
             <div className="w-[450px] pt-8">
-              <ButtonAuth text={'Submit'} />
+              <ButtonAuth text={"Submit"} />
             </div>
           </Link>
         </div>
 
         <div className="flex justify-center pt-8 mr-56">
           <p className="text-[15px] font-[600]">
-            Kembali ke{' '}
-            <Link to={'/login'} className="text-primary">
+            Kembali ke{" "}
+            <Link to={"/login"} className="text-primary">
               Sign in
             </Link>
           </p>
