@@ -4,7 +4,7 @@ import { CardStokDarah } from '../../components/item/CardStokDarah';
 export const StokDarah = () => {
   return (
     <>
-      <section>
+      <section id="stokdarah">
         <div className="flex justify-center pt-14 pb-14">
           <h1 className="text-[40px] font-bold">Daftar PMI</h1>
         </div>

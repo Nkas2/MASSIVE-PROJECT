@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
+import { Link } from 'react-router-dom';
 
 export const EventCard = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -27,39 +28,43 @@ export const EventCard = () => {
   return (
     <>
       <div className="flex flex-col pl-24 pt-7">
-        <div className="flex items-center justify-around bg-white w-11/12 h-32 rounded-2xl ">
-          {/* icon */}
-          <div className="flex">
-            <div className="flex items-center justify-center bg-secondary rounded-full w-16 h-16">
-              <img src="./assets/icon-calendar.svg" alt="" />
+        <Link to="/jadwalDonor/detailEvent">
+          <div className="flex items-center justify-around bg-white w-11/12 h-32 rounded-2xl ">
+            {/* icon */}
+            <div className="flex">
+              <div className="flex items-center justify-center bg-secondary rounded-full w-16 h-16">
+                <img src="./assets/icon-calendar.svg" alt="" />
+              </div>
             </div>
-          </div>
+            {/* place */}
+            <div className="flex flex-col">
+              <h1 className="text-xl font-bold">Itc Cempaka Mas Donor Darah</h1>
+              <p className="text-sm text-customGray">Kamis, 20 November 2023</p>
+            </div>
 
-          {/* place */}
-          <div className="flex flex-col">
-            <h1 className="text-xl font-bold">Itc Cempaka Mas Donor Darah</h1>
-            <p className="text-sm text-greyButton">Kamis, 20 November 2023</p>
-          </div>
+            {/* date */}
+            <div>
+              <p className="text-sm text-customGray">Kamis, 09:00 - 14:00</p>
+            </div>
 
-          {/* date */}
-          <div>
-            <p className="text-sm text-greyButton">Kamis, 09:00 - 14:00</p>
-          </div>
+            {/* city */}
+            <div>
+              <p className="text-sm text-customGray">Jakarta Pusat</p>
+            </div>
 
-          {/* city */}
-          <div>
-            <p className="text-sm text-greyButton">Jakarta Pusat</p>
+            {/* button */}
+            <button
+              className={`py-4 px-9 rounded-[30px] text-white ${
+                isClicked ? 'bg-primary' : 'bg-customGray'
+              }`}
+              onClick={(e) => {
+                handleClick();
+                e.stopPropagation();
+              }}>
+              {buttonText}
+            </button>
           </div>
-
-          {/* button */}
-          <button
-            className={`py-4 px-9 rounded-[30px] text-white ${
-              isClicked ? 'bg-primary hover:bg-primaryHover' : 'bg-greyButton hover:bg-greyButtonHover'
-            }`}
-            onClick={handleClick}>
-            {buttonText}
-          </button>
-        </div>
+        </Link>
       </div>
 
       {ConfirmationModal && (

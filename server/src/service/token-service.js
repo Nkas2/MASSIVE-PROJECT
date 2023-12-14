@@ -1,8 +1,7 @@
-import db from "../application/db.js";
 import { RespondError } from "../error/ressponse-error.js";
 import { generateAccessToken } from "../lib/token/token.js";
 
-const newToken = async (token) => {
+const newToken = async (token, db) => {
   if (!token) {
     throw new RespondError(404, "Not found");
   }
