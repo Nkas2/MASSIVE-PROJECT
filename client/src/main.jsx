@@ -23,6 +23,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import { EditProfile } from "./page/Profile/EditProfile.jsx";
 // import { EditPassword } from "./page/Profile/EditPassword.jsx";
 // import { HomeAuth } from "./page/Homepage/HomeAuth.jsx";
+
 // import { CssBaseline } from '@mui/material';
 
 export const router = createBrowserRouter([
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path: "/stokDarah",
         element: <StokDarah />,
+      },
+      {
+        path: '/detailStokDarah',
+        element: <DetailStokDarah />,
       },
     ],
   },

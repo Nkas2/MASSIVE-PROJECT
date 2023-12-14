@@ -36,7 +36,6 @@ export const EventCard = () => {
                 <img src="./assets/icon-calendar.svg" alt="" />
               </div>
             </div>
-
             {/* place */}
             <div className="flex flex-col">
               <h1 className="text-xl font-bold">Itc Cempaka Mas Donor Darah</h1>
