@@ -18,6 +18,7 @@ import { SignUp } from "./page/SignUp.jsx";
 import { LupaPassword } from "./page/LupaPassword.jsx";
 import { DetailEvent } from "./page/JadwalDonor/DetailEvent.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { DetailStokDarah } from "./page/StokDarah/DetailStokDarah.jsx";
 // import { HomeAuthLayout } from "./layout/Auth/HomeAuthLayout.jsx";
 // import { Profile } from "./page/Profile/Profile.jsx";
 // import { EditProfile } from "./page/Profile/EditProfile.jsx";
@@ -48,7 +49,7 @@ export const router = createBrowserRouter([
         element: <StokDarah />,
       },
       {
-        path: '/detailStokDarah',
+        path: "/stokDarah/detailStokDarah",
         element: <DetailStokDarah />,
       },
     ],
