@@ -28,8 +28,6 @@ const login = async (req, res, next) => {
     const type = req.query.type;
     const result = await userService.login(req.body, connection);
     if (type === "website") {
-      res.setHeader("Access-Control-Allow-Credentials", "true");
-      res.setHeader("Access-Control-Expose-Headers", "Set-Cookie");
       res
         .status(200)
         .cookie("token", result.token, {
