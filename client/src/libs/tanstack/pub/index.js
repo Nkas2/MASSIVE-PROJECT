@@ -16,6 +16,7 @@ export const useLogin = ({ onSuccess, onError }) => {
   return useMutation({
     mutationFn: async (body) => {
       const login = await axiosInstance.post("/users/login?type=website", body);
+      console.log(login);
       return login;
     },
     onSuccess,

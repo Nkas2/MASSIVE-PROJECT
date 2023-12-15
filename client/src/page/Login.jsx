@@ -1,10 +1,58 @@
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Link } from "react-router-dom";
 import { ButtonAuth } from "../components/item/ButtonAuth";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { useLogin } from "../libs/tanstack/pub";
+import { useState } from "react";
+import CardToaster from "../components/comp/atoms/CardToaster";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
+  const [showToaster, setShowToaster] = useState(false);
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    loginUser(data);
+  };
+
+  const {
+    mutate: loginUser,
+    error: resError,
+    isPending,
+  } = useLogin({
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: () => {
+      setShowToaster(true);
+      // document.getElementById("email").blur();
+      // document.getElementById("password").blur();
+      setTimeout(() => {
+        setShowToaster(false);
+      }, 3000);
+    },
+  });
+
+  const handleClose = () => {
+    setShowToaster(false);
+  };
   return (
     <>
+      {showToaster ? (
+        <CardToaster
+          closeToaster={handleClose}
+          error={resError.response?.data.errors}
+        />
+      ) : (
+        ""
+      )}
       <div className="w-full h-full flex justify-center bg-white">
         <div className="w-[600px] flex flex-col items-center">
           {/* btn */}
@@ -32,25 +80,63 @@ export const Login = () => {
             </h1>
           </div>
 
-          <form className="mt-6 mb-3">
+          <form className="mt-6 mb-3" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <div className="mb-5">
                 <h1>Email</h1>
                 <input
+                  {...register("email", {
+                    required: {
+                      value: true,
+                      message: "Please Input Email",
+                    },
+                    pattern: {
+                      value:
+                        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                      message: "Input valid email",
+                    },
+                  })}
                   type="email"
                   name="email"
-                  className="w-96  outline-none h-14 rounded-[15px] border-2 pl-4 border-slate-300"
+                  // id="email"
+                  className={`w-96 block outline-none h-11 rounded-[15px] border-2 pl-4 ${
+                    errors.email ? "border-red-300" : "border-slate-300"
+                  } `}
                   autoComplete="off"
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="email"
+                  render={({ message }) => (
+                    <small className="text-red-500">{message}</small>
+                  )}
                 />
               </div>
 
               <div className="mb-3">
                 <h1>Password</h1>
                 <input
+                  {...register("password", {
+                    required: {
+                      value: true,
+                      message: "Please Input Email",
+                    },
+                    minLength: { value: 8, message: "Minimum password 8" },
+                  })}
                   type="password"
                   name="password"
-                  className="w-96  outline-none h-14 rounded-[15px] border-2 pl-4 border-slate-300"
+                  // id="password"
+                  className={`w-96 block outline-none h-11 rounded-[15px] border-2 pl-4 ${
+                    errors.password ? "border-red-300" : "border-slate-300"
+                  } `}
                   autoComplete="off"
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="password"
+                  render={({ message }) => (
+                    <small className="text-red-500">{message}</small>
+                  )}
                 />
               </div>
 
@@ -61,9 +147,7 @@ export const Login = () => {
               </Link>
             </div>
 
-            <Link to={"/auth"} className="pt-4">
-              <ButtonAuth text={"Log In"} />
-            </Link>
+            <ButtonAuth text={"Log In"} isPending={isPending} />
           </form>
           <div className="flex items-center pt">
             <p className="font-[600]">

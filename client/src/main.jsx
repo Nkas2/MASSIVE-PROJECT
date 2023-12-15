@@ -29,7 +29,6 @@ import { DetailStokDarah } from "./page/StokDarah/DetailStokDarah.jsx";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
     element: <RootLayout />,
     children: [
       {
