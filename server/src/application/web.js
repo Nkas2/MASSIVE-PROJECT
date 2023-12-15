@@ -16,8 +16,8 @@ dotenv.config();
 export const web = express();
 web.use(
   cors({
+    origin: true,
     credentials: true,
-    origin: "http://localhost:5173",
   })
 );
 web.use("/images", express.static(path.join(__dirname, "./../../images")));
