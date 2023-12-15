@@ -6,4 +6,6 @@ export const axiosInstance = axios.create({
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
   },
+  withCredentials: true,
+  credentials: "include",
 });

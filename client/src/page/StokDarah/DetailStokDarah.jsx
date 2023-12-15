@@ -42,10 +42,8 @@ export const DetailStokDarah = () => {
       </div>
 
       {/* footer */}
-      <footer className="">
-        <Footer />
-        <img src="./assets/waves-footer.svg" alt="" className="w-full" />
-      </footer>
+
+      <Footer />
     </>
   );
 };

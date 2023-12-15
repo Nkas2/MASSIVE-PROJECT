@@ -8,7 +8,7 @@ const BackdropOverlay = () => {
 
 const ToasterOverlay = ({ children }) => {
   return (
-    <div className="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-30">
+    <div className="fixed top-0 animate-slide-in-two left-0 w-full h-screen flex items-center justify-center z-30">
       <div className="bg-white shadow-2xl shadow-black max-w-7xl w-[400px] p-8 rounded-2xl flex justify-center">
         {children}
       </div>

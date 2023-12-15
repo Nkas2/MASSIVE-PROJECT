@@ -1,4 +1,5 @@
 // eslint-disable-next-line no-unused-vars
+import { Navigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 
 export const AuthLayout = () => {
