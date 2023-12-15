@@ -4,5 +4,8 @@ export const axiosInstance = axios.create({
   baseURL: "https://massive-project-production.up.railway.app/api",
   headers: {
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
   },
+  withCredentials: true,
+  credentials: "include",
 });
