@@ -17,6 +17,7 @@ export const web = express();
 web.use(
   cors({
     credentials: true,
+    origin: "*",
   })
 );
 web.use("/images", express.static(path.join(__dirname, "./../../images")));
