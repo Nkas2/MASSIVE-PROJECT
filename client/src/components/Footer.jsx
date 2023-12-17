@@ -13,7 +13,7 @@ export const Footer = () => {
 
         <div className=" ">
           <div className="flex items-center">
-            <img src="./assets/logo.svg" alt="" className="w-[38px] h-[52px]" />
+            <img src="/assets/logo.svg" alt="" className="w-[38px] h-[52px]" />
             <h1 className="pl-2 font-bold text-white text-3xl">BLOODBAGS</h1>
           </div>
           <div className="flex pt-6">

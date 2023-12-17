@@ -1,3 +1,7 @@
 import axios from "axios";
 
-export const axiosJWT = axios.create();
+const axiosJWT = axios.create({
+  baseURL: "https://massive-project-production.up.railway.app/api",
+});
+
+export default axiosJWT;
