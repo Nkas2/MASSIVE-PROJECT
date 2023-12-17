@@ -1,15 +1,19 @@
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ButtonAuth } from "../components/item/ButtonAuth";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useLogin } from "../libs/tanstack/pub";
 import { useState } from "react";
 import CardToaster from "../components/comp/atoms/CardToaster";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken } from "../store/tokenSlice/tokenSlice";
+import { jwtDecode } from "jwt-decode";
+import { setUser } from "../store/userSlice/userSlice";
 
 export const Login = () => {
   const [showToaster, setShowToaster] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     register,
@@ -28,12 +32,16 @@ export const Login = () => {
     isPending,
   } = useLogin({
     onSuccess: (res) => {
-      console.log(res);
+      localStorage.setItem("token_user", res.data.data.token);
+      dispatch(setToken(res.data.data.accessToken));
+      const decode = jwtDecode(res.data.data.accessToken);
+      dispatch(setUser(decode));
+      navigate("/", { replace: true });
     },
     onError: () => {
       setShowToaster(true);
-      // document.getElementById("email").blur();
-      // document.getElementById("password").blur();
+      document.getElementById("email").blur();
+      document.getElementById("password").blur();
       setTimeout(() => {
         setShowToaster(false);
       }, 3000);
@@ -98,7 +106,7 @@ export const Login = () => {
                   })}
                   type="email"
                   name="email"
-                  // id="email"
+                  id="email"
                   className={`w-96 block outline-none h-11 rounded-[15px] border-2 pl-4 ${
                     errors.email ? "border-red-300" : "border-slate-300"
                   } `}
@@ -125,7 +133,7 @@ export const Login = () => {
                   })}
                   type="password"
                   name="password"
-                  // id="password"
+                  id="password"
                   className={`w-96 block outline-none h-11 rounded-[15px] border-2 pl-4 ${
                     errors.password ? "border-red-300" : "border-slate-300"
                   } `}

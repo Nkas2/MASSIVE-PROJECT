@@ -1,10 +1,14 @@
-import { Footer } from '../../components/Footer';
-import { useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
+import { Footer } from "../../components/Footer";
+import { useEffect, useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const DetailEvent = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [ConfirmationModal, setConfirmationModal] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleClick = () => {
     if (isClicked) {
@@ -23,7 +27,7 @@ export const DetailEvent = () => {
     setConfirmationModal(false);
   };
 
-  const buttonText = isClicked ? 'Tersimpan' : 'Ingatkan Saya';
+  const buttonText = isClicked ? "Tersimpan" : "Ingatkan Saya";
 
   return (
     <>
@@ -80,9 +84,10 @@ export const DetailEvent = () => {
                   {/* button */}
                   <button
                     className={`mb-10 py-4 px-9 rounded-[30px] text-white ${
-                      isClicked ? 'bg-primary' : 'bg-customGray'
+                      isClicked ? "bg-primary" : "bg-customGray"
                     }`}
-                    onClick={handleClick}>
+                    onClick={handleClick}
+                  >
                     {buttonText}
                   </button>
                 </div>
@@ -93,7 +98,8 @@ export const DetailEvent = () => {
             <>
               <div
                 className="fixed inset-0 bg-black bg-opacity-20 z-10"
-                onClick={handleCancelConfirmation}></div>
+                onClick={handleCancelConfirmation}
+              ></div>
               <div className="fixed inset-0 flex items-center justify-center z-20">
                 <div className="w-[560px] h-[230px] bg-white p-5 rounded-2xl">
                   <div className="flex justify-end">
@@ -107,12 +113,14 @@ export const DetailEvent = () => {
                   <div className="flex justify-center gap-16 pt-3">
                     <button
                       onClick={handleCancelConfirmation}
-                      className="mr-2 font-bold hover:bg-secondary px-4 rounded-xl">
+                      className="mr-2 font-bold hover:bg-secondary px-4 rounded-xl"
+                    >
                       Batal
                     </button>
                     <button
                       onClick={handleConfirmCancellation}
-                      className="text-primary font-bold hover:bg-secondary px-4 rounded-xl">
+                      className="text-primary font-bold hover:bg-secondary px-4 rounded-xl"
+                    >
                       Ubah
                     </button>
                   </div>
@@ -134,10 +142,7 @@ export const DetailEvent = () => {
       </div>
 
       {/* footer */}
-      <div className="">
-        <Footer />
-        <img src="../assets/waves-footer.svg" alt="" className="w-full" />
-      </div>
+      <Footer />
     </>
   );
 };

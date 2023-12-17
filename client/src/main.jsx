@@ -19,6 +19,9 @@ import { LupaPassword } from "./page/LupaPassword.jsx";
 import { DetailEvent } from "./page/JadwalDonor/DetailEvent.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { DetailStokDarah } from "./page/StokDarah/DetailStokDarah.jsx";
+import MainLay from "./layout/MainLay.jsx";
+import "leaflet/dist/leaflet.css";
+
 // import { HomeAuthLayout } from "./layout/Auth/HomeAuthLayout.jsx";
 // import { Profile } from "./page/Profile/Profile.jsx";
 // import { EditProfile } from "./page/Profile/EditProfile.jsx";
@@ -29,45 +32,51 @@ import { DetailStokDarah } from "./page/StokDarah/DetailStokDarah.jsx";
 
 export const router = createBrowserRouter([
   {
-    element: <RootLayout />,
+    element: <MainLay />,
     children: [
+      {
+        element: <RootLayout />,
+        children: [
+          {
+            path: "/",
+            element: <Home />,
+          },
+          {
+            path: "/jadwalDonor",
+            element: <JadwalDonor />,
+          },
+          {
+            path: "/jadwalDonor/detailEvent",
+            element: <DetailEvent />,
+          },
+          {
+            path: "/stokDarah",
+            element: <StokDarah />,
+          },
+          {
+            path: "stokDarah/detailStokDarah",
+            element: <DetailStokDarah />,
+          },
+        ],
+      },
       {
         path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/jadwalDonor",
-        element: <JadwalDonor />,
-      },
-      {
-        path: "/jadwalDonor/detailEvent",
-        element: <DetailEvent />,
-      },
-      {
-        path: "/stokDarah",
-        element: <StokDarah />,
-      },
-      {
-        path: "/stokDarah/detailStokDarah",
-        element: <DetailStokDarah />,
-      },
-    ],
-  },
-  {
-    path: "/",
-    element: <AuthLayout />,
-    children: [
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/signup",
-        element: <SignUp />,
-      },
-      {
-        path: "/lupaPassword",
-        element: <LupaPassword />,
+
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "/login",
+            element: <Login />,
+          },
+          {
+            path: "/signup",
+            element: <SignUp />,
+          },
+          {
+            path: "/lupaPassword",
+            element: <LupaPassword />,
+          },
+        ],
       },
     ],
   },
@@ -104,7 +113,13 @@ export const router = createBrowserRouter([
 ]);
 
 const theme = createTheme({});
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -1,9 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 import { Navigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getToken } from "../../store/tokenSlice/tokenSlice";
 
 export const AuthLayout = () => {
-  return (
+  const token = useSelector(getToken);
+  const isLoggin = token === null ? false : true;
+
+  return !isLoggin ? (
     <>
       <div className="flex">
         {/* form */}
@@ -21,5 +26,7 @@ export const AuthLayout = () => {
         </div>
       </div>
     </>
+  ) : (
+    <Navigate to={"/"} replace />
   );
 };

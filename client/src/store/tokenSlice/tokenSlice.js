@@ -11,6 +11,7 @@ export const tokenSlice = createSlice({
     },
     resetToken: (state) => {
       state.value = null;
+      console.log(state);
     },
   },
 });
@@ -18,3 +19,5 @@ export const tokenSlice = createSlice({
 export const { setToken, resetToken } = tokenSlice.actions;
 
 export default tokenSlice.reducer;
+
+export const getToken = (state) => state.token.value;
