@@ -1,14 +1,19 @@
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookRounded from "@mui/icons-material/FacebookRounded";
-import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookRounded from '@mui/icons-material/FacebookRounded';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export const Footer = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <div
         id="foot"
-        className=" max-w-[1700px] mx-auto flex items-end justify-center gap-32 pb-10"
-      >
+        className=" max-w-[1700px] mx-auto flex items-end justify-center gap-32 pb-10">
         {/* logo */}
 
         <div className=" ">
@@ -30,30 +35,42 @@ export const Footer = () => {
             <ul className="list-none">
               <div className="flex flex-grow-1 gap-32">
                 <div className="flex flex-col items-start gap-3">
-                  <li className="border-l-2 border-white pl-3 text-left text-white">
-                    Home
-                  </li>
-                  <li className="border-l-2 border-white pl-3 text-left text-white">
-                    Contact Us
-                  </li>
+                  <NavLink to={'/'}>
+                    <li className="border-l-2 border-white pl-3 text-left text-white">
+                      Home
+                    </li>
+                  </NavLink>
+                  <NavLink to={'/contactUs'}>
+                    <li className="border-l-2 border-white pl-3 text-left text-white">
+                      Contact Us
+                    </li>
+                  </NavLink>
                 </div>
 
                 <div className="flex flex-col items-start gap-2">
-                  <li className="border-l-2 border-white pl-3 text-left text-white">
-                    Terms & Condition
-                  </li>
-                  <li className="border-l-2 border-white pl-3 text-left text-white">
-                    Privacy Policy
-                  </li>
+                  <NavLink to={'/terms'}>
+                    <li className="border-l-2 border-white pl-3 text-left text-white">
+                      Terms & Condition
+                    </li>
+                  </NavLink>
+                  <NavLink to={'/privacy'}>
+                    <li className="border-l-2 border-white pl-3 text-left text-white">
+                      Privacy Policy
+                    </li>
+                  </NavLink>
                 </div>
 
                 <div className="flex flex-col items-start gap-2">
-                  <li className="border-l-2 border-white pl-3 text-left text-white">
-                    Jadwal Donor
-                  </li>
-                  <li className="border-l-2 border-white pl-3 text-left text-white">
-                    Stok Darah
-                  </li>
+                  <NavLink to={'/jadwalDonor'}>
+                    <li className="border-l-2 border-white pl-3 text-left text-white">
+                      Jadwal Donor
+                    </li>
+                  </NavLink>
+                  <NavLink to={'/stokDarah'}>
+                    <li className="border-l-2 border-white pl-3 text-left text-white">
+                      Stok Darah
+                    </li>
+                  </NavLink>
                 </div>
               </div>
             </ul>
