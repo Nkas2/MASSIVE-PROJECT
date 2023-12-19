@@ -1,26 +1,28 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./app.css";
-import "./index.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { createTheme } from "@mui/material/styles";
-import { Provider } from "react-redux";
-import store from "./store/store.js";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './app.css';
+import './index.css';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { createTheme } from '@mui/material/styles';
+import { Provider } from 'react-redux';
+import store from './store/store.js';
 // page and layout
-import RootLayout from "./layout/Root/index.jsx";
-import { Home } from "./page/Homepage/Home.jsx";
-import { ThemeProvider } from "@emotion/react";
-import { JadwalDonor } from "./page/JadwalDonor/JadwalDonor.jsx";
-import { StokDarah } from "./page/StokDarah/StokDarah.jsx";
-import { AuthLayout } from "./layout/Auth/AuthLayout.jsx";
-import { Login } from "./page/Login.jsx";
-import { SignUp } from "./page/SignUp.jsx";
-import { LupaPassword } from "./page/LupaPassword.jsx";
-import { DetailEvent } from "./page/JadwalDonor/DetailEvent.jsx";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { DetailStokDarah } from "./page/StokDarah/DetailStokDarah.jsx";
-import MainLay from "./layout/MainLay.jsx";
-import "leaflet/dist/leaflet.css";
+import RootLayout from './layout/Root/index.jsx';
+import { Home } from './page/Homepage/Home.jsx';
+import { ThemeProvider } from '@emotion/react';
+import { JadwalDonor } from './page/JadwalDonor/JadwalDonor.jsx';
+import { StokDarah } from './page/StokDarah/StokDarah.jsx';
+import { AuthLayout } from './layout/Auth/AuthLayout.jsx';
+import { Login } from './page/Login.jsx';
+import { SignUp } from './page/SignUp.jsx';
+import { LupaPassword } from './page/LupaPassword.jsx';
+import { DetailEvent } from './page/JadwalDonor/DetailEvent.jsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { DetailStokDarah } from './page/StokDarah/DetailStokDarah.jsx';
+import MainLay from './layout/MainLay.jsx';
+import 'leaflet/dist/leaflet.css';
+import { ResetPassword } from './page/ResetPassword.jsx';
+import { VerifikasiEmail } from './page/VerifikasiEmail.jsx';
 
 // import { HomeAuthLayout } from "./layout/Auth/HomeAuthLayout.jsx";
 // import { Profile } from "./page/Profile/Profile.jsx";
@@ -38,43 +40,51 @@ export const router = createBrowserRouter([
         element: <RootLayout />,
         children: [
           {
-            path: "/",
+            path: '/',
             element: <Home />,
           },
           {
-            path: "/jadwalDonor",
+            path: '/jadwalDonor',
             element: <JadwalDonor />,
           },
           {
-            path: "/jadwalDonor/detailEvent",
+            path: '/jadwalDonor/detailEvent',
             element: <DetailEvent />,
           },
           {
-            path: "/stokDarah",
+            path: '/stokDarah',
             element: <StokDarah />,
           },
           {
-            path: "stokDarah/detailStokDarah",
+            path: 'stokDarah/detailStokDarah',
             element: <DetailStokDarah />,
           },
         ],
       },
       {
-        path: "/",
+        path: '/',
 
         element: <AuthLayout />,
         children: [
           {
-            path: "/login",
+            path: '/login',
             element: <Login />,
           },
           {
-            path: "/signup",
+            path: '/signup',
             element: <SignUp />,
           },
           {
-            path: "/lupaPassword",
+            path: '/lupaPassword',
             element: <LupaPassword />,
+          },
+          {
+            path: '/resetPassword',
+            element: <ResetPassword />,
+          },
+          {
+            path: '/verifikasiEmail',
+            element: <VerifikasiEmail />,
           },
         ],
       },
@@ -121,7 +131,7 @@ const queryClient = new QueryClient({
   },
 });
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>

@@ -1,23 +1,22 @@
 import { Form, Link } from 'react-router-dom';
 import { ButtonAuth } from '../components/item/ButtonAuth';
 
-export const LupaPassword = () => {
+export const VerifikasiEmail = () => {
   return (
     <>
       <div className="w-full h-screen flex flex-col bg-white mr-56 pl-16">
         <div className="mt-10 mb-8">
-          <h1 className="text-4xl font-bold mb-5">Lupa Password</h1>
+          <h1 className="text-4xl font-bold mb-5">Verifikasi Email</h1>
 
           <p className="text-customGray">
-            Silahkan masukkan alamat email anda untuk <br />
-            menerima pesan verifikasi
+            Silahkan masukkan kode verifikasi email anda
           </p>
         </div>
 
         <div>
           <Form method="post">
             <div>
-              <h1>Email</h1>
+              <h1>Kode Verifikasi</h1>
               <input
                 type="email"
                 name="email"
@@ -31,6 +30,13 @@ export const LupaPassword = () => {
               <ButtonAuth text={'Submit'} />
             </div>
           </Link>
+        </div>
+
+        <div className="flex justify-center pt-8 mr-56">
+          <p className="text-[15px] font-[600]">
+            Tidak menerimak kode verivikasi?{' '}
+            <Link className="text-primary">Kirim Ulang</Link>
+          </p>
         </div>
 
         <div className="flex justify-center pt-8 mr-56">
