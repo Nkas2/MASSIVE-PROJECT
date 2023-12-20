@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./app.css";
-import "./index.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { createTheme } from "@mui/material/styles";
-import { Provider } from "react-redux";
-import store from "./store/store.js";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './app.css';
+import './index.css';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { createTheme } from '@mui/material/styles';
+import { Provider } from 'react-redux';
+import store from './store/store.js';
 // page and layout
 import RootLayout from "./layout/Root/index.jsx";
 import { Home } from "./page/Homepage/Home.jsx";
@@ -24,6 +24,12 @@ import "leaflet/dist/leaflet.css";
 import { Profile } from "./page/Profile/Profile.jsx";
 import { EditProfile } from "./page/Profile/EditProfile.jsx";
 import { EditPassword } from "./page/Profile/EditPassword.jsx";
+import { ResetPassword } from './page/ResetPassword.jsx';
+import { VerifikasiEmail } from './page/VerifikasiEmail.jsx';
+import { ContactUs } from './page/FooterPage/ContactUs.jsx';
+import { TermsCondition } from './page/FooterPage/TermsCondition.jsx';
+import { PrivacyPolicy } from './page/FooterPage/PrivacyPolicy.jsx';
+
 
 // import { HomeAuthLayout } from "./layout/Auth/HomeAuthLayout.jsx";
 // import { Profile } from "./page/Profile/Profile.jsx";
@@ -41,11 +47,11 @@ export const router = createBrowserRouter([
         element: <RootLayout />,
         children: [
           {
-            path: "/",
+            path: '/',
             element: <Home />,
           },
           {
-            path: "/jadwalDonor",
+            path: '/jadwalDonor',
             element: <JadwalDonor />,
           },
           {
@@ -53,7 +59,7 @@ export const router = createBrowserRouter([
             element: <DetailEvent />,
           },
           {
-            path: "/stokDarah",
+            path: '/stokDarah',
             element: <StokDarah />,
           },
           {
@@ -72,24 +78,43 @@ export const router = createBrowserRouter([
             path: "/editPassword",
             element: <EditPassword />,
           },
+          {
+            path: '/contactUs',
+            element: <ContactUs />,
+          },
+          {
+            path: '/terms',
+            element: <TermsCondition />,
+          },
+          {
+            path: '/privacy',
+            element: <PrivacyPolicy />,
         ],
       },
       {
-        path: "/",
+        path: '/',
 
         element: <AuthLayout />,
         children: [
           {
-            path: "/login",
+            path: '/login',
             element: <Login />,
           },
           {
-            path: "/signup",
+            path: '/signup',
             element: <SignUp />,
           },
           {
-            path: "/lupaPassword",
+            path: '/lupaPassword',
             element: <LupaPassword />,
+          },
+          {
+            path: '/resetPassword',
+            element: <ResetPassword />,
+          },
+          {
+            path: '/verifikasiEmail',
+            element: <VerifikasiEmail />,
           },
         ],
       },
@@ -136,7 +161,7 @@ const queryClient = new QueryClient({
   },
 });
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
