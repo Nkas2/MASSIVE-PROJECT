@@ -7,25 +7,29 @@ import { createTheme } from '@mui/material/styles';
 import { Provider } from 'react-redux';
 import store from './store/store.js';
 // page and layout
-import RootLayout from './layout/Root/index.jsx';
-import { Home } from './page/Homepage/Home.jsx';
-import { ThemeProvider } from '@emotion/react';
-import { JadwalDonor } from './page/JadwalDonor/JadwalDonor.jsx';
-import { StokDarah } from './page/StokDarah/StokDarah.jsx';
-import { AuthLayout } from './layout/Auth/AuthLayout.jsx';
-import { Login } from './page/Login.jsx';
-import { SignUp } from './page/SignUp.jsx';
-import { LupaPassword } from './page/LupaPassword.jsx';
-import { DetailEvent } from './page/JadwalDonor/DetailEvent.jsx';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { DetailStokDarah } from './page/StokDarah/DetailStokDarah.jsx';
-import MainLay from './layout/MainLay.jsx';
-import 'leaflet/dist/leaflet.css';
+import RootLayout from "./layout/Root/index.jsx";
+import { Home } from "./page/Homepage/Home.jsx";
+import { ThemeProvider } from "@emotion/react";
+import { JadwalDonor } from "./page/JadwalDonor/JadwalDonor.jsx";
+import { StokDarah } from "./page/StokDarah/StokDarah.jsx";
+import { AuthLayout } from "./layout/Auth/AuthLayout.jsx";
+import { Login } from "./page/Login.jsx";
+import { SignUp } from "./page/SignUp.jsx";
+import { LupaPassword } from "./page/LupaPassword.jsx";
+import { DetailEvent } from "./page/JadwalDonor/DetailEvent.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { DetailStokDarah } from "./page/StokDarah/DetailStokDarah.jsx";
+import MainLay from "./layout/MainLay.jsx";
+import "leaflet/dist/leaflet.css";
+import { Profile } from "./page/Profile/Profile.jsx";
+import { EditProfile } from "./page/Profile/EditProfile.jsx";
+import { EditPassword } from "./page/Profile/EditPassword.jsx";
 import { ResetPassword } from './page/ResetPassword.jsx';
 import { VerifikasiEmail } from './page/VerifikasiEmail.jsx';
 import { ContactUs } from './page/FooterPage/ContactUs.jsx';
 import { TermsCondition } from './page/FooterPage/TermsCondition.jsx';
 import { PrivacyPolicy } from './page/FooterPage/PrivacyPolicy.jsx';
+
 
 // import { HomeAuthLayout } from "./layout/Auth/HomeAuthLayout.jsx";
 // import { Profile } from "./page/Profile/Profile.jsx";
@@ -51,7 +55,7 @@ export const router = createBrowserRouter([
             element: <JadwalDonor />,
           },
           {
-            path: '/jadwalDonor/detailEvent',
+            path: "/jadwalDonor/:pmiId",
             element: <DetailEvent />,
           },
           {
@@ -59,8 +63,20 @@ export const router = createBrowserRouter([
             element: <StokDarah />,
           },
           {
-            path: 'stokDarah/detailStokDarah',
+            path: "stokDarah/:pmiId",
             element: <DetailStokDarah />,
+          },
+          {
+            path: "/profile",
+            element: <Profile />,
+          },
+          {
+            path: "/editProfile",
+            element: <EditProfile />,
+          },
+          {
+            path: "/editPassword",
+            element: <EditPassword />,
           },
           {
             path: '/contactUs',
@@ -73,7 +89,6 @@ export const router = createBrowserRouter([
           {
             path: '/privacy',
             element: <PrivacyPolicy />,
-          },
         ],
       },
       {
@@ -129,10 +144,10 @@ export const router = createBrowserRouter([
   //       path: '/editProfile',
   //       element: <EditProfile/>,
   //     },
-  //     {
-  //       path: '/editPassword',
-  //       element: <EditPassword/>,
-  //     },
+  // {
+  //   path: '/editPassword',
+  //   element: <EditPassword/>,
+  // },
   //   ],
   // },
 ]);

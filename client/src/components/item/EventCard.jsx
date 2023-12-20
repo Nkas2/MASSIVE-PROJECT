@@ -45,10 +45,9 @@ export const EventCard = ({
         setConfirmationModal(true);
         setEventIdDelete((prev) => (prev = id));
       } else {
-        setReminder(!reminder);
-        const tokena = await checkToken(token);
-        const conf = `${tokena}   ${id}`;
+        const conf = `${token}   ${id}`;
         remindMe(conf);
+        setReminder(!reminder);
       }
     } else {
       setShowWarning(true);
@@ -81,7 +80,7 @@ export const EventCard = ({
           </div>
           {/* place */}
           <div className="flex flex-col">
-            <Link to="detailEvent">
+            <Link to={id}>
               <h1 className="text-xl font-bold w-96 truncate">{name}</h1>
             </Link>
             <p className="text-sm text-customGray">

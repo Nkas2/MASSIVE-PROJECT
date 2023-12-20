@@ -4,7 +4,7 @@ import Divider from "@mui/material/Divider";
 import { useDispatch } from "react-redux";
 import { getToken, resetToken } from "../../../store/tokenSlice/tokenSlice";
 import { useLogout } from "../../../libs/tanstack/pub";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { checkToken } from "../../../libs/utils/checkToken";
 import Avatar from "@mui/material/Avatar";
 import { useEffect, useState } from "react";
@@ -45,19 +45,21 @@ const UserDetailsPopup = ({ close }) => {
       >
         <div className="">
           <button type="button">
-            <div className="w-fit mx-auto">
-              <Avatar
-                src={
-                  user.image === null
-                    ? ""
-                    : `https://massive-project-production.up.railway.app/images/${user.image}`
-                }
-                sx={{ height: 50, width: 50 }}
-              />
-            </div>
-            <h1 className="capitalize w-36 text-center truncate font-light text-sm my-2">
-              {user.name}
-            </h1>
+            <Link to={"/profile"}>
+              <div className="w-fit mx-auto">
+                <Avatar
+                  src={
+                    user.image === null
+                      ? ""
+                      : `https://massive-project-production.up.railway.app/images/${user.image}`
+                  }
+                  sx={{ height: 50, width: 50 }}
+                />
+              </div>
+              <h1 className="capitalize w-36 text-center truncate font-light text-sm my-2">
+                {user.name}
+              </h1>
+            </Link>
           </button>
           <Divider />
           <button onClick={logOut}>

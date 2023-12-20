@@ -8,7 +8,7 @@ const NotLogin = ({ close }) => {
   return (
     <NotLoginModal>
       <div className="w-80 relative">
-        <button onClick={close} className="absolute -top-4 -right-4">
+        <button onClick={close} className="absolute -top-4 -right-4 z-30">
           <CloseIcon fontSize="large" />
         </button>
         <div className="w-fit mx-auto">

@@ -27,10 +27,26 @@ export const userSlice = createSlice({
         exp: null,
       };
     },
+    setNameAndPhoneNumber: (state, action) => {
+      console.log(action.payload);
+      state.value = {
+        ...state.value,
+        name: action.payload.name,
+        phone_number: action.payload.phone_number,
+      };
+    },
+    setImage: (state, action) => {
+      console.log(action.payload);
+      state.value = {
+        ...state.value,
+        image: action.payload,
+      };
+    },
   },
 });
 
-export const { resetUser, setUser } = userSlice.actions;
+export const { resetUser, setUser, setNameAndPhoneNumber, setImage } =
+  userSlice.actions;
 
 export default userSlice.reducer;
 
