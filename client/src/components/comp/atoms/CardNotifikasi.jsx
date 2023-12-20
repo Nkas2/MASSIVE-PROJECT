@@ -3,7 +3,7 @@ import Notifitem from "./Notifitem";
 import { useEffect, useState } from "react";
 
 const CardNotifikasi = ({ close }) => {
-  const notif = false;
+  const notif = true;
   const [isOpen, setIsOpen] = useState(true);
   useEffect(() => {
     const handleScroll = () => {

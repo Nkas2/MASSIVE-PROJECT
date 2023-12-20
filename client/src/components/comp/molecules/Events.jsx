@@ -3,14 +3,18 @@ import { formatJam } from "../../../libs/utils/formatJam";
 import { dapatkanHari } from "../../../libs/utils/formatTanggal";
 import { getToken } from "../../../store/tokenSlice/tokenSlice";
 import { EventCard } from "../../item/EventCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Skeleton from "@mui/material/Skeleton";
-import { useEffect } from "react";
+import { rf } from "../../../store/rf";
+import { res, set } from "../../../store/activity/activitySlice";
 
 const Events = () => {
   const token = useSelector(getToken);
-
-  const { data, isLoading, refetch } = useEvent(token);
+  let rfa = useSelector(rf);
+  const { data, isLoading, refetch } = useEvent(`${token} ${rfa}`);
+  const dispatch = useDispatch();
+  dispatch(res());
+  dispatch(set(data));
 
   return (
     <div>
@@ -22,7 +26,7 @@ const Events = () => {
             <Skeleton variant="rounded" width={"100%"} height={120} />
           </>
         ) : (
-          data.map((ev) => {
+          data?.map((ev) => {
             return (
               <EventCard
                 key={ev.id}

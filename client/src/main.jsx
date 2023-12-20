@@ -21,6 +21,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { DetailStokDarah } from "./page/StokDarah/DetailStokDarah.jsx";
 import MainLay from "./layout/MainLay.jsx";
 import "leaflet/dist/leaflet.css";
+import { Profile } from "./page/Profile/Profile.jsx";
+import { EditProfile } from "./page/Profile/EditProfile.jsx";
+import { EditPassword } from "./page/Profile/EditPassword.jsx";
 
 // import { HomeAuthLayout } from "./layout/Auth/HomeAuthLayout.jsx";
 // import { Profile } from "./page/Profile/Profile.jsx";
@@ -46,7 +49,7 @@ export const router = createBrowserRouter([
             element: <JadwalDonor />,
           },
           {
-            path: "/jadwalDonor/detailEvent",
+            path: "/jadwalDonor/:pmiId",
             element: <DetailEvent />,
           },
           {
@@ -54,8 +57,20 @@ export const router = createBrowserRouter([
             element: <StokDarah />,
           },
           {
-            path: "stokDarah/detailStokDarah",
+            path: "stokDarah/:pmiId",
             element: <DetailStokDarah />,
+          },
+          {
+            path: "/profile",
+            element: <Profile />,
+          },
+          {
+            path: "/editProfile",
+            element: <EditProfile />,
+          },
+          {
+            path: "/editPassword",
+            element: <EditPassword />,
           },
         ],
       },
@@ -104,10 +119,10 @@ export const router = createBrowserRouter([
   //       path: '/editProfile',
   //       element: <EditProfile/>,
   //     },
-  //     {
-  //       path: '/editPassword',
-  //       element: <EditPassword/>,
-  //     },
+  // {
+  //   path: '/editPassword',
+  //   element: <EditPassword/>,
+  // },
   //   ],
   // },
 ]);

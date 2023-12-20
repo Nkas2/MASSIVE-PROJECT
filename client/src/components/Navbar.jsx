@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ButtonSignIn } from "./item/ButtonSignIn";
 import { useSelector } from "react-redux";
 import { getUser } from "../store/userSlice/userSlice";
@@ -56,9 +56,11 @@ export const Navbar = () => {
         <div className="w-[30px] h-[40px] flex">
           <img src="./assets/logo.svg" alt="" />
 
-          <p className=" flex items-center font-logoFont font-bold text-[24px] pl-1 text-primary">
-            Blood <span className="text-secondary">Bags</span>
-          </p>
+          <Link to={"/"}>
+            <p className=" flex items-center font-logoFont font-bold text-[24px] pl-1 text-primary">
+              Blood <span className="text-secondary">Bags</span>
+            </p>
+          </Link>
         </div>
 
         {/* navlink */}
@@ -80,6 +82,7 @@ export const Navbar = () => {
 
             <NavLink
               to={"/jadwalDonor"}
+              replace
               className={({ isActive }) =>
                 isActive
                   ? "font-bold text-lg underline underline-offset-8 decoration-[4px] decoration-primary "

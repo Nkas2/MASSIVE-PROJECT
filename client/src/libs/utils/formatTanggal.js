@@ -20,3 +20,9 @@ export function dapatkanHari(tanggalString) {
   // Mengembalikan nama hari
   return namaHari;
 }
+
+export function formatDate(isoString) {
+  const options = { day: "numeric", month: "long", year: "numeric" };
+  const date = new Date(isoString);
+  return date.toLocaleDateString("id-ID", options);
+}
