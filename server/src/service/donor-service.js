@@ -30,7 +30,7 @@ const getDetailPmi = async (id, db) => {
 
 const getEvent = async (db) => {
   const [event] = await db.execute(
-    "SELECT id,name,city, date AS dt, ,DATE_FORMAT(date, '%e %M %Y') AS date , start, end, 0 as remind FROM events ORDER BY dt DESC"
+    "SELECT id,name,city, date AS dt ,DATE_FORMAT(date, '%e %M %Y') AS date , start, end, 0 as remind FROM events ORDER BY dt DESC"
   );
 
   return event;
