@@ -23,6 +23,9 @@ import MainLay from './layout/MainLay.jsx';
 import 'leaflet/dist/leaflet.css';
 import { ResetPassword } from './page/ResetPassword.jsx';
 import { VerifikasiEmail } from './page/VerifikasiEmail.jsx';
+import { ContactUs } from './page/FooterPage/ContactUs.jsx';
+import { TermsCondition } from './page/FooterPage/TermsCondition.jsx';
+import { PrivacyPolicy } from './page/FooterPage/PrivacyPolicy.jsx';
 
 // import { HomeAuthLayout } from "./layout/Auth/HomeAuthLayout.jsx";
 // import { Profile } from "./page/Profile/Profile.jsx";
@@ -58,6 +61,18 @@ export const router = createBrowserRouter([
           {
             path: 'stokDarah/detailStokDarah',
             element: <DetailStokDarah />,
+          },
+          {
+            path: '/contactUs',
+            element: <ContactUs />,
+          },
+          {
+            path: '/terms',
+            element: <TermsCondition />,
+          },
+          {
+            path: '/privacy',
+            element: <PrivacyPolicy />,
           },
         ],
       },
